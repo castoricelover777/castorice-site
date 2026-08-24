@@ -176,6 +176,12 @@
 
 ---
 
+## [2026-08-26]（Codex：移除花园区块）
+- from: codex
+- 内容：按主人要求，从截图所示的“II 花园 / THE GARDEN”开始删除后续旧 UI。已移除 `site/index.html` 的花园区块与顶部花园导航，同时清理 `site/script.js` 的花海 canvas 交互和 `site/style.css` 的花园样式；前面的 Hero、展品图集与 footer 保留。版本更新为 `v0.5.1`，等待 DSH 制定后续扩展方向。
+
+---
+
 ## [2026-08-24]（DSH：网页右下角增加版本名 + 版本管理约定）
 - from: dsh
 - 内容：

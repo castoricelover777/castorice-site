@@ -86,8 +86,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .chapter>span{font-size:28px;color:var(--coral);font-family:var(--serif);text-shadow:0 0 16px rgba(231,168,216,.6)}
 .letter-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12vw;align-items:center}
 .letter-copy{max-width:510px}
-.letter-copy h2,.garden-head h2{font:600 clamp(54px,7vw,100px)/.85 var(--serif);letter-spacing:-.08em;margin:27px 0 35px}
-.letter-copy h2 em,.garden-head h2 em{color:var(--coral);font-style:normal;text-shadow:0 0 30px rgba(231,168,216,.55)}
+.letter-copy h2{font:600 clamp(54px,7vw,100px)/.85 var(--serif);letter-spacing:-.08em;margin:27px 0 35px}
+.letter-copy h2 em{color:var(--coral);font-style:normal;text-shadow:0 0 30px rgba(231,168,216,.55)}
 .letter-copy>p:not(.eyebrow){font:18px/1.75 var(--serif);color:var(--muted);max-width:390px}
 .note{max-height:0;overflow:hidden;color:var(--coral);font:15px/1.6 var(--serif);max-width:330px;transition:max-height .6s var(--ease),margin .6s var(--ease)}
 .note.open{max-height:100px;margin-top:24px}
@@ -98,18 +98,6 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .card-drawing>span{position:absolute;bottom:18px;left:17px;font:16px var(--serif);color:var(--neon)}
 /* 蝴蝶卡片画的蝴蝶(复用 .butterfly 内部，于卡片内) */
 .card-drawing .butterfly{position:relative;width:170px;height:160px;right:auto;top:auto;filter:drop-shadow(0 0 18px rgba(185,140,255,.5))}
-/* 花园 */
-.garden{padding-top:160px;padding-bottom:180px;position:relative}
-.garden-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:50px}
-.garden-head>p{max-width:210px;color:var(--muted);font:14px/1.7 var(--serif)}
-.garden-box{height:570px;position:relative;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 40%,rgba(58,33,130,.55),rgba(18,8,39,.8));overflow:hidden;box-shadow:0 0 50px rgba(107,75,184,.3),inset 0 0 60px rgba(185,140,255,.08)}
-.garden-box:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(231,168,216,.12),transparent 40%,rgba(107,75,184,.28));pointer-events:none}
-.garden-box canvas{position:absolute;inset:0;width:100%;height:100%}
-.garden-label{position:absolute;top:20px;left:23px;color:var(--neon);font:10px var(--mono);letter-spacing:.12em}
-.seed{position:absolute;right:22px;top:17px;border:1px solid var(--neon);background:rgba(58,33,130,.5);color:var(--ink);padding:11px 14px;font:10px var(--mono);cursor:none;backdrop-filter:blur(4px)}
-.seed:hover{background:rgba(107,75,184,.5)}
-.memory-pop{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:linear-gradient(150deg,rgba(58,33,130,.9),rgba(29,17,54,.95));color:var(--ink);padding:13px 18px;max-width:340px;text-align:center;font:16px var(--serif);opacity:0;transition:opacity .5s;border:1px solid var(--line);backdrop-filter:blur(6px)}
-.memory-pop.show{opacity:1}
 /* 档案 */
 .archive{padding-top:150px;padding-bottom:160px}
 .archive-list{max-width:900px;border-top:1px solid var(--line)}
@@ -139,8 +127,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 /* 焦点可见 */
 a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:2px}
 /* 窄屏 */
-@media(max-width:800px){body{cursor:auto}.nav{padding:0 6vw}.nav-note{display:none}.section{padding-left:8vw;padding-right:8vw}.hero{min-height:850px}.hero-copy{margin-top:0}.hero h1{font-size:90px}.hero-art{width:92vw;height:500px;right:-20%;top:38%;opacity:.75}.hero-stamp{right:8%;bottom:9%}.letter-grid{display:block}.letter-card{margin-top:70px}.garden-head{display:block}.garden-head>p{margin-top:25px}.garden-box{height:470px}.archive-row b{font-size:25px}.footer{display:grid;gap:12px}.cursor{display:none}}
-@media(max-width:480px){.hero{min-height:760px}.hero h1{font-size:72px}.hero-art{right:-36%;top:36%}.letter-card{transform:none;box-shadow:0 0 40px rgba(107,75,184,.35)}.memory-pop{max-width:85vw;width:max-content}.archive-row b{font-size:22px}.version-tag{right:14px;bottom:10px}}
+@media(max-width:800px){body{cursor:auto}.nav{padding:0 6vw}.nav-note{display:none}.section{padding-left:8vw;padding-right:8vw}.hero{min-height:850px}.hero-copy{margin-top:0}.hero h1{font-size:90px}.hero-art{width:92vw;height:500px;right:-20%;top:38%;opacity:.75}.hero-stamp{right:8%;bottom:9%}.letter-grid{display:block}.letter-card{margin-top:70px}.archive-row b{font-size:25px}.footer{display:grid;gap:12px}.cursor{display:none}}
+@media(max-width:480px){.hero{min-height:760px}.hero h1{font-size:72px}.hero-art{right:-36%;top:36%}.letter-card{transform:none;box-shadow:0 0 40px rgba(107,75,184,.35)}.archive-row b{font-size:22px}.version-tag{right:14px;bottom:10px}}
 
 /* ============ CASTORICE 开屏 intro（保留，不随主题改动） ============ */
 .intro-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;width:100vw;height:100vh;height:100dvh;background:#160e12;overflow:hidden;cursor:default}

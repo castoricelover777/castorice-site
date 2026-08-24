@@ -69,7 +69,7 @@ const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersec
 const cursor=$('#cursor');const heroBg=document.querySelector('.hero-bg');window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
 /* 滚动视差：hero 大图随滚动慢移 + 三区块渐显 */
 window.addEventListener('scroll',()=>{ if(heroBg){heroBg.style.transform=`translateY(${scrollY*0.12}px) scale(1.05)`;} },{passive:true});
-$$('.hand-link,.car-main,.theme,.seed,.nav-link,.car-btn,.car-thumb').forEach(e=>{e.addEventListener('pointerenter',()=>{cursor.style.width='34px';cursor.style.height='32px'});e.addEventListener('pointerleave',()=>{cursor.style.width='26px';cursor.style.height='24px'})});
+$$('.hand-link,.car-main,.theme,.nav-link,.car-btn,.car-thumb').forEach(e=>{e.addEventListener('pointerenter',()=>{cursor.style.width='34px';cursor.style.height='32px'});e.addEventListener('pointerleave',()=>{cursor.style.width='26px';cursor.style.height='24px'})});
 window.addEventListener('scroll',()=>{$('#progress').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'});
 $('#theme').addEventListener('click',()=>{const dark=document.body.classList.toggle('dark');$('#theme').setAttribute('aria-pressed',dark)});
 /* ===== 横向电影图集轮播 ===== */
@@ -130,13 +130,6 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   window.addEventListener('keydown',e=>{if(!lightbox.classList.contains('show')){if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);}});
   show(0);
 })();
-const canvas=$('#gardenCanvas'),ctx=canvas.getContext('2d'),box=$('#gardenBox'),pop=$('#memoryPop'),seed=$('#seed'),count=$('#flowerCount');let flowers=[],pointer={x:.5,y:.5};
-function resize(){const r=box.getBoundingClientRect(),d=devicePixelRatio;canvas.width=r.width*d;canvas.height=r.height*d;canvas.style.width=r.width+'px';canvas.style.height=r.height+'px';ctx.setTransform(d,0,0,d,0,0)}
-function makeFlower(x=Math.random(),y=Math.random(),life=1){flowers.push({x,y,life,size:2+Math.random()*4,phase:Math.random()*7,speed:.4+Math.random()*.8,hue:Math.random()>.5?'#c99bff':(Math.random()>.5?'#e7a8d8':'#b98cff')})}
-for(let i=0;i<22;i++)makeFlower();count.textContent=String(flowers.length).padStart(2,'0');window.addEventListener('resize',resize);resize();
-box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width;pointer.y=(e.clientY-r.top)/r.height});box.addEventListener('pointerleave',()=>{pointer.x=.5;pointer.y=.5});
-seed.addEventListener('click',()=>{makeFlower(.5+(Math.random()-.5)*.35,.55+(Math.random()-.5)*.35,1);count.textContent=String(flowers.length).padStart(2,'0');pop.classList.add('show');setTimeout(()=>pop.classList.remove('show'),2400)});
-function draw(t){const r=box.getBoundingClientRect(),w=r.width,h=r.height;ctx.clearRect(0,0,w,h);flowers.forEach(f=>{f.phase+=.008*f.speed;const px=f.x*w+(pointer.x-.5)*25,py=f.y*h+Math.sin(f.phase)*10+(pointer.y-.5)*18;ctx.beginPath();ctx.fillStyle=f.hue;ctx.globalAlpha=.25+.55*f.life;ctx.shadowBlur=13;ctx.shadowColor=f.hue;ctx.arc(px,py,f.size,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.globalAlpha=.25;ctx.strokeStyle='#d9b9ff';ctx.moveTo(px,py);ctx.lineTo(px+(pointer.x-.5)*18,py-30);ctx.stroke()});ctx.globalAlpha=1;ctx.shadowBlur=0;requestAnimationFrame(draw)}requestAnimationFrame(draw);
 /* ===== 背景飘落花瓣 / 蝴蝶粒子 ===== */
 (function(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
