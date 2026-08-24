@@ -485,3 +485,9 @@
   - 章节指示器点击目标章节后短暂高亮章徽。
   - 新增 2 张官方 PV 抽帧素材：`chapters/archive/archive-02.jpg`、`chapters/skills/skill-04.jpg`，均为 1280×536 / 2.39:1；来源仍为已登记的官方 PV，页面未引入来源不明二创。
   - 版本更新为 `v0.9.0`；本地页面、脚本、样式和新增图片 HTTP 200 检查通过，未改动开屏 intro、视频素材和主题主色。
+
+---
+
+## [2026-08-26]（Codex：v0.9.1 开屏性能优化）
+- from: codex
+- 内容：针对主人反馈的开屏卡顿，将 `site/assets/ult_intro_small.mp4` 从 1920×1080 / 约 5.9MB / 12.6Mbps 重编码为 1280×720 / 约 2.9MB / H.264 Main / yuv420p / 无音轨，并启用 faststart；`index.html` 将视频预加载改为 `metadata`，`script.js` 收敛重复播放尝试，避免多个就绪事件同时触发 `play()`。开屏画面、虚化退出、poster 和正文内容保持不变。版本更新为 `v0.9.1`。来源：现有开屏视频素材，无新增外部图片。

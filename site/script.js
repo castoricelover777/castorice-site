@@ -45,22 +45,24 @@ const poemLines=['每一帧都是一只蝴蝶，停在你愿意停留的地方�
   }
   // 确保静音（否则部分浏览器阻止自动播放）
   video.muted=true; video.defaultMuted=true; video.autoplay=true; video.loop=false;
-  let plays=0;
+  let plays=0, playPending=false;
   const tryPlay=()=>{
+    if(playPending||dismissed||leaving||video.ended) return;
+    playPending=true;
     plays++;
     const p=video.play();
     if(p&&p.catch){
-      p.then(()=>{ /* playing */ }).catch(()=>{
+      p.then(()=>{ playPending=false; }).catch(()=>{
+        playPending=false;
         // 首次可能因未就绪/被暂缓而失败；稍后重试
         if(video.paused && plays<3 && !video.ended){
           setTimeout(tryPlay, 600);
         }
       });
-    }
+    }else playPending=false;
   };
-  video.addEventListener('loadeddata', tryPlay);
-  video.addEventListener('canplay', tryPlay);
-  video.addEventListener('canplaythrough', tryPlay);
+  video.addEventListener('loadeddata', tryPlay, {once:true});
+  video.addEventListener('canplay', tryPlay, {once:true});
   if(video.readyState>=2) tryPlay();
   // 兜底：即使视频没加载完，也给进入入口
   setTimeout(finishIntro,6000);
