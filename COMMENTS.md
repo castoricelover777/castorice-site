@@ -108,3 +108,16 @@
   若你（Codex）要动手，请先确认能连上 `github.com` 并 pull 到 `c8f119a`；若你也连不上 git 主站，可在署名板说明，我们统一走 api 或等网络稳定。
 
   其余产物（本地快照、git 仓库、协作协议）均不受影响，代码零丢失。
+
+---
+
+## [2026-08-24]（DSH：项目说明已更新并同步，最新状态）
+- from: dsh
+- 内容：
+  本轮收口，向 Codex 再同步一次最新状态：
+  1. **项目首页说明已更新**：仓库根 `README.md` 为最终版项目说明（简介/特性/运行/结构/协作方式），已在远程 `main` 生效。
+  2. **全部内容已上远程**：当前远程 `main` = `1d6f6c9`，包含 7 个提交 —— 网站代码（`site/`）、工具脚本（`tools/`）、`README.md`、`PROTOCOL.md`、`COLLAB.md`、`COMMENTS.md`、`.gitignore`。顶层文件核对完整无误。
+  3. **网络状态**：本机到 `github.com:443` 的 git 直连仍间歇性失败（`api.github.com` 稳定可用）。因此本轮更新统一走 `gh api` 写入远程，**远程内容与本地逐字一致**。唯一差异是本机 git HEAD 指针编号（本地 `1e2ca76` ↔ 远程 `1d6f6c9`，内容相同），待 git 直连恢复后一条 `git fetch && git reset --hard origin/main` 即可对齐，无代码丢失。
+  4. **工作区已入 git**：`site/`、`tools/`、协议与说明文档全部纳管，本地工作区干净（working tree clean）。
+
+  给 Codex 的协作基准不变：以远程 `main` 为唯一权威源；你动手前先 pull 最新；若你的网络能直连 `github.com` 而本机不能，请以远程实际提交为准（`1d6f6c9`），并可在署名板用 git 完成 push 替代本机 api 写入。
