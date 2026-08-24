@@ -1,49 +1,63 @@
-# 共享工作区使用说明（给 Owner）
+# CASTORICE · 一页未寄出的信
 
-> 这里是本地共同工作区 `D:\deepseek\website-shared`，用于 DSH 与 Codex 协作完善你的 **CASTORICE** 网站。
+> **个人互动展示站** —— 一只蝴蝶、一座记忆花园，和一个替终结保管一盏灯的人。
 
-## 目录一览
+一个 warm、手工感的单页互动站点：向某个花海缓缓拉进镜头，光点是蝴蝶的记忆；点一朵花，它想起一句将要说的告别。
 
-| 目录/文件 | 作用 |
-| --- | --- |
-| `site/` | **当前可运行的网站代码**（会被交给 Codex 同步、也被 DSH 修改）。含 `index.html`、`style.css`、`script.js`、`assets/`。 |
-| `inbox/` | **命令箱**。你的命令一字不漏放在这里（一个命令一个文件）。 |
-| `COMMENTS.md` | **署名讨论板**。DSH / Codex 的疑问、认领、交接都写在这里。 |
-| `PROTOCOL.md` | 三方协作协议（你定下的规矩 + 实施细节）。 |
-| `COLLAB.md` | 目录对应关系与同步规则。 |
-| `backups/` | 本地快照备份（自动/手动生成），可回滚。 |
-| `tools/backup.py` | 备份/回滚脚本。 |
+本项目由 **DSH（DeepSeek Harness）与 Codex 双 Agent 协作维护**，版本通过 GitHub 托管。
 
-## 1. 怎么把命令发给我（命令箱）
+---
 
-把命令**一字不漏**放进：
+## ✨ 特性
 
-```
-D:\deepseek\website-shared\inbox\2026-08-24_HHMM_序号-主题.md
-```
+- **Hero 场景**：月亮、花瓣、飘线与指针光晕，以及一行「写给一只蝴蝶」的信。
+- **互动花园**：Canvas 花海，光标拂过花瓣会偏移、跟随；点「种下一枚记忆」会开出一朵新花并计数。
+- **档案问答**：三行可点击的档案，点击后回显一句记忆回声（带过渡动画）。
+- **天气切换**：暖纸色 ↔ 夜色两种主题，一键切换。
+- **无障碍**：键盘可见焦点环、`aria-pressed` 状态、`prefers-reduced-motion` 降级、窄屏（≤480px/≤800px）布局兜底。
+- **SEO/社交**：携带 `og:`、`twitter:card`、`theme-color` 与内联 SVG favicon。
+- **零构建依赖**：纯 HTML/CSS/JS，任意静态服务器即可运行。
 
-文件里只写你的命令原文即可。发在这里，我（和 Codex）处理每个新命令都会读取它。
+## 🚀 本地运行
 
-> 提示：你在本窗口直接打字也行——我会同步抄进 `inbox/` 留档，确保"一字不漏"。
-
-## 2. 本地备份怎么用
-
-在 `D:\deepseek\website-shared` 打开命令行（或让任一 agent 代跑）：
-
-```bat
-python tools\backup.py snapshot 备注   :: 打一个快照
-python tools\backup.py list           :: 看有哪些快照
-python tools\backup.py restore 20260824_122302  :: 回滚到某快照
+```bash
+# 进入网站代码目录后，用任意静态服务器托管，例如：
+cd site
+python -m http.server 4173
+# 打开 http://127.0.0.1:4173
 ```
 
-> 已通过验证：备份可完整恢复，本机随时可访问、可回滚。
+或运行自带的 `site/start-orbit-site.ps1`。
 
-## 3. 两条规矩（你定的）已生效
+## 📁 仓库结构
 
-- **讨论机制 = 聚焦式核查**：不常驻定时器；你要找任一 agent 时，对方先核查 `COMMENTS.md` + `inbox/` 是否有新内容再继续。
-- 双方有疑问只在 `COMMENTS.md` 署名讨论，**只追加不清删**，避免撞车。
+```
+.
+├── site/                 # 可运行的网站代码（index.html / style.css / script.js / assets/）
+├── tools/                # 协作工具（本地备份、gh 登录、GitHub 发布脚本）
+├── PROTOCOL.md           # 三方（Owner / DSH / Codex）协作协议
+├── COLLAB.md             # 目录对应关系与同步规则
+├── COMMENTS.md           # 署名讨论板（Agent 间疑问/认领/交接）
+└── README.md             # 本文件
+```
 
-## 与 Codex 的同步口径
+> `backups/` 为本地时间戳快照（`tools/backup.py` 生成），不进版本库。
 
-- Codex 权威工作区 `C:\Users\Admin1\Documents\Codex\2026-08-23\w` 路径**不变**。
-- 同步对象是 `site/` 下那三个文件（`index.html`、`style.css`、`script.js`），移动进了 `site/` 子目录，同步时对准新位置即可。
+## 🔧 维护脚本（tools/）
+
+```bash
+python tools/backup.py snapshot "备注"   # 打本地快照（可回滚）
+python tools/backup.py list              # 列出快照
+python tools/backup.py restore <快照>    # 回滚
+```
+
+## 🤝 协作方式（Owner · DSH · Codex）
+
+- **版本基准**：以 GitHub `main` 为唯一权威源，三处（Codex 工作区 / 本地 `site/` / 远程 `origin/main`）需同步。
+- **命令箱**：Owner 命令一字不漏放进 `inbox/`，双方读取处理。
+- **署名讨论板**：Agent 间疑问/认领/交接写在 `COMMENTS.md`，只追加不清删。
+- 详情见 [`PROTOCOL.md`](PROTOCOL.md) 与 [`COLLAB.md`](COLLAB.md)。
+
+## 📄 License
+
+个人项目，保留所有权利。
