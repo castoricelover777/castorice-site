@@ -2,17 +2,17 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CASTORICE / 一页未寄出的信</title>
-  <meta name="description" content="CASTORICE / 一页未寄出的信 — 个人互动展示站，关于一只蝴蝶、一座记忆花园，和一个替终结保管一盏灯的人。">
-  <meta name="theme-color" content="#efe4d1">
+  <title>CASTORICE / MEMORIA · 一组关于蝴蝶的安静研究</title>
+  <meta name="description" content="CASTORICE / MEMORIA — 个人互动艺术展，关于遐蝶、蝴蝶与记忆。大幅展品逐幅陈列，一朵花、一只蝴蝶、一段安静的告别。">
+  <meta name="theme-color" content="#160b26">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="CASTORICE / 一页未寄出的信">
-  <meta property="og:description" content="个人互动展示站 — 一只蝴蝶、一座记忆花园。动一下，花就醒了。">
+  <meta property="og:title" content="CASTORICE / MEMORIA · 一组关于蝴蝶的安静研究">
+  <meta property="og:description" content="个人互动艺术展 — 一只蝴蝶、一座记忆花园。动一下，花就醒了。">
   <meta property="og:site_name" content="CASTORICE">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23efe4d1'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23713b4a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23160b26'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23c99bff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,19 +20,50 @@
     <video class="intro-video" id="introVideo" src="assets/ult_intro_small.mp4" poster="assets/ult_intro_poster.png" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
     <div class="intro-vignette"></div>
     <button class="intro-skip" id="introSkip">跳过动画 <span>SKIP &gt;</span></button>
-    <div class="intro-episode">A CASTORICE OPENING / LETTER NO.03</div>
-    <button class="intro-enter" id="introEnter" tabindex="-1">进入花园 <span>↓</span></button>
+    <div class="intro-episode">A CASTORICE OPENING / MEMORIA</div>
+    <button class="intro-enter" id="introEnter" tabindex="-1">进入美术馆 <span>↓</span></button>
     <div class="intro-tip">稍候，正在唤醒一只蝴蝶…</div>
   </div>
   <div class="paper-noise"></div><div class="progress" id="progress"></div>
-  <header class="nav"><a href="#top" class="mark">C<span>·</span>0827</a><div class="nav-note">A SMALL MEMORY GARDEN / FAN UI STUDY</div><button class="theme" id="theme" aria-label="切换色调" aria-pressed="false">◐ <span>换个天气</span></button></header>
+  <header class="nav"><a href="#top" class="mark">CAST<span>·</span>MEMORIA</a><div class="nav-note">A SMALL MEMORY GARDEN / 关于蝴蝶的安静研究</div><button class="theme" id="theme" aria-label="切换色调" aria-pressed="false">◐ <span>换个天气</span></button></header>
   <main id="top">
-    <section class="hero section"><div class="hero-copy reveal"><p class="eyebrow">LETTER NO. 03 / 哀地里亚</p><h1>写给<br><i>一只蝴蝶</i>。</h1><p class="intro">有些人从雪里来。她把死亡折成一朵花，又把花留给还在路上的人。</p><a href="#letter" class="hand-link">打开这封信 <b>↓</b></a></div><div class="hero-art" id="heroArt"><div class="moon"></div><div class="butterfly"><i></i><i></i><i></i><i></i><b>✦</b></div><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="thread"></div><span class="scribble">castorice<br>— memory in bloom</span></div><div class="hero-stamp">FOR THE ONE<br>WHO REMEMBERS</div></section>
-    <section class="letter section" id="letter"><div class="chapter reveal"><span>01</span><p>一页 / THE LETTER</p></div><div class="letter-grid"><div class="letter-copy reveal"><p class="eyebrow">DEAR CASTORICE,</p><h2>我想把今天<br><em>寄给明天。</em></h2><p>不是为了挽留什么。只是想告诉你：那些短暂经过的花、月亮和雪，都曾经认真地活过。</p><button class="underlined" id="openNote">读一段旁注 <span>＋</span></button><div class="note" id="note">P.S. 如果你看见一只紫色蝴蝶，请替我问问它，春天是不是已经到了。</div></div><div class="letter-card reveal"><div class="card-top"><span>哀地里亚</span><span>03.2 / 2025</span></div><div class="card-drawing"><div class="butterfly"><i></i><i></i><i></i><i></i><b>✦</b></div><span>一封没有地址的信</span></div><div class="card-bottom">死荫的侍女 / MEMORY KEEPER</div></div></div></section>
-    <section class="garden section" id="garden"><div class="chapter reveal"><span>02</span><p>花园 / THE GARDEN</p></div><div class="garden-head reveal"><h2>动一下，<br><em>花就醒了。</em></h2><p>把光标放进花海。点击一朵花，看看它记住了什么。</p></div><div class="garden-box reveal" id="gardenBox"><canvas id="gardenCanvas"></canvas><div class="garden-label">LIVE MEMORY / <span id="flowerCount">00</span> BLOOMS</div><button class="seed" id="seed">✦ <span>种下一枚记忆</span></button><div class="memory-pop" id="memoryPop">“所有的告别，都会在某个清晨重新开花。”</div></div></section>
-    <section class="archive section" id="archive"><div class="chapter reveal"><span>03</span><p>档案 / THE ARCHIVE</p></div><div class="archive-list"><button class="archive-row reveal" data-copy="她不是终结本身，而是替终结保管一盏灯。"><span>01</span><b>她从哪里来？</b><i>↗</i></button><button class="archive-row reveal" data-copy="花瓣落下的时候，时间会短暂地停在原地。"><span>02</span><b>她在等待什么？</b><i>↗</i></button><button class="archive-row reveal" data-copy="死亡并不带走所有东西。它留下了下一次相遇的形状。"><span>03</span><b>她记得什么？</b><i>↗</i></button></div><p class="archive-answer" id="archiveAnswer">点击一行，听听它的回声。</p></section>
+    <section class="hero section">
+      <div class="hero-bg" style="background-image:url('assets/gallery/gal_01.jpg')"></div>
+      <div class="hero-veil"></div>
+      <div class="hero-copy reveal"><p class="eyebrow">CASTORICE / MEMORIA — 一组关于蝴蝶与死亡的安静研究</p><h1>写给<br><i>一只蝴蝶</i>。</h1><p class="intro">有些人从雪里来。她把死亡折成一朵花，又把花留给还在路上的人。</p><a href="#gallery" class="hand-link">进入美术馆 <b>↓</b></a></div>
+      <span class="hero-caption">CAST · FIG.01 — 哀地里亚，替终结保管一盏灯的侍女</span>
+    </section>
+
+    <section class="gallery section" id="gallery">
+      <div class="chapter reveal"><span>I</span><p>展品 / THE GALLERY</p></div>
+      <p class="gallery-intro reveal">一组关于 <b>记忆、死亡与新生</b> 的静态切片。<br>每一帧都是一只蝴蝶，停在你愿意停留的地方。</p>
+      <div class="gallery-grid">
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_01.jpg" alt="遗蝶图01" loading="lazy"><figcaption><span>CAST · NO.01</span><b>她从哪里来？</b><p>雪做的孩子，替终结保管一盏灯。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_02.jpg" alt="遗蝶图02" loading="lazy"><figcaption><span>CAST · NO.02</span><b>蝴蝶的翅膀</b><p>折成花的形状，落在无人记得的夜。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_03.jpg" alt="遗蝶图03" loading="lazy"><figcaption><span>CAST · NO.03</span><b>月光借给她</b><p>今夜，所有的告别都轻一点。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_04.jpg" alt="遗蝶图04" loading="lazy"><figcaption><span>CAST · NO.04</span><b>记忆花园</b><p>点一朵花，它想起一句将要说的告别。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_05.jpg" alt="遗蝶图05" loading="lazy"><figcaption><span>CAST · NO.05</span><b>四月的新雪</b><p>有些花，只在离别之后才开。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_06.jpg" alt="遗蝶图06" loading="lazy"><figcaption><span>CAST · NO.06</span><b>撑伞的人</b><p>她为一场不会停的雨，备了一整夜。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_07.jpg" alt="遗蝶图07" loading="lazy"><figcaption><span>CAST · NO.07</span><b>花与灰烬</b><p>死亡并不带走所有东西，它留下相遇的形状。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_08.jpg" alt="遗蝶图08" loading="lazy"><figcaption><span>CAST · NO.08</span><b>黄昏的衣摆</b><p>她把一整个黄昏，穿成了沉默。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_09.jpg" alt="遗蝶图09" loading="lazy"><figcaption><span>CAST · NO.09</span><b>静止的时间</b><p>花瓣落下时，时间会停在原地。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_10.jpg" alt="遗蝶图10" loading="lazy"><figcaption><span>CAST · NO.10</span><b>一封没有地址的信</b><p>所有未说出口的话，都寄给了昨天。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_11.jpg" alt="遗蝶图11" loading="lazy"><figcaption><span>CAST · NO.11</span><b>持灯者</b><p>她不是终结本身，而是替终结保管一盏灯。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_12.jpg" alt="遗蝶图12" loading="lazy"><figcaption><span>CAST · NO.12</span><b>蝴蝶与星</b><p>她记得的，是来路，不是归途。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_13.jpg" alt="遗蝶图13" loading="lazy"><figcaption><span>CAST · NO.13</span><b>虚构的春天</b><p>如果你看见一只紫色蝴蝶，替我问问春天到了没有。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_14.jpg" alt="遗蝶图14" loading="lazy"><figcaption><span>CAST · NO.14</span><b>雪与蝶</b><p>有些人从雪里来，把花留给还在路上的人。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_15.jpg" alt="遗蝶图15" loading="lazy"><figcaption><span>CAST · NO.15</span><b>黎明前</b><p>所有的告别，都会在某个清晨重新开花。</p></figcaption></figure>
+        <figure class="gallery-item reveal"><img src="assets/gallery/gal_16.jpg" alt="遗蝶图16" loading="lazy"><figcaption><span>CAST · NO.16</span><b>Memoria</b><p>她把今天，寄给了明天。</p></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="garden section" id="garden">
+      <div class="chapter reveal"><span>II</span><p>花园 / THE GARDEN</p></div>
+      <div class="garden-head reveal"><h2>动一下，<br><em>花就醒了。</em></h2><p>把光标放进花海。点击一朵花，看看它记住了什么。</p></div>
+      <div class="garden-box reveal" id="gardenBox"><canvas id="gardenCanvas"></canvas><div class="garden-label">LIVE MEMORY / <span id="flowerCount">00</span> BLOOMS</div><button class="seed" id="seed">✦ <span>种下一枚记忆</span></button><div class="memory-pop" id="memoryPop">“所有的告别，都会在某个清晨重新开花。”</div></div>
+    </section>
   </main>
-  <footer class="footer"><span>CASTORICE / ORIGINAL FAN UI STUDY</span><span>made slowly, with a little weather</span><a href="#top">↑</a></footer>
-  <div class="version-tag" id="versionTag">CASTORICE · v0.2.0</div>
+  <footer class="footer"><span>CAST·MEMORIA / 遐蝶个人艺术展 · 非官方同人</span><span>made slowly, with a little weather</span><a href="#top">↑</a></footer>
+  <div class="version-tag" id="versionTag">CASTORICE · v0.3.0</div>
   <div class="cursor" id="cursor"></div><script src="script.js"></script>
 </body></html>

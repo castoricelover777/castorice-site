@@ -153,3 +153,35 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 .intro-overlay.leaving{opacity:0;filter:blur(18px);transform:scale(1.04);pointer-events:none}
 .intro-overlay.done{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:700px){.intro-episode{left:8vw;bottom:44px}.intro-enter{right:18px;bottom:26px}.intro-tip{display:none}}
+
+/* ============ 画廊艺术展 ============ */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 22%;filter:saturate(.9) contrast(1.05);transform:scale(1.05);transition:transform 6s ease}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,7,28,.82) 0%,rgba(14,7,28,.45) 45%,rgba(14,7,28,.55) 100%),radial-gradient(ellipse at 30% 50%,rgba(185,140,255,.18),transparent 60%)}
+.hero-copy{position:relative;z-index:3;max-width:600px;margin-top:40px}
+.hero-caption{position:absolute;z-index:3;left:13vw;bottom:26px;color:rgba(231,200,255,.55);font:10px var(--mono);letter-spacing:.18em}
+.hero-copy .intro{max-width:400px}
+.gallery{padding-top:130px;padding-bottom:140px}
+.gallery-intro{color:var(--muted);font:17px/1.9 var(--serif);max-width:520px;margin:0 0 60px}
+.gallery-intro b{color:var(--coral);font-weight:600}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:34px 26px}
+.gallery-item{margin:0;position:relative;overflow:hidden;border-radius:4px;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,.45);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.gallery-item img{display:block;width:100%;aspect-ratio:16/12;object-fit:cover;filter:saturate(.92) contrast(1.04);transition:transform .7s var(--ease),filter .5s}
+.gallery-item:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(107,75,184,.4)}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,4,20,.85));opacity:.55;transition:opacity .5s}
+.gallery-item:hover:after{opacity:.75}
+.gallery-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 18px 16px;z-index:2;color:#f2ecff}
+.gallery-item figcaption span{display:block;font:10px var(--mono);letter-spacing:.22em;color:var(--neon);opacity:.9;margin-bottom:6px}
+.gallery-item figcaption b{font:600 24px/1.15 var(--serif);letter-spacing:-.01em}
+.gallery-item figcaption p{margin:6px 0 0;font:13px/1.5 var(--serif);color:rgba(235,220,255,.75)}
+/* hero 图用较轻压暗，保证画面美观 */
+.hero .hero-bg{filter:saturate(.95) contrast(1.06)}
+/* 灯箱 */
+.lightbox{position:fixed;inset:0;z-index:9000;background:rgba(6,3,14,.92);backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.lightbox.show{opacity:1;visibility:visible}
+.lightbox-img{max-width:88vw;max-height:80vh;object-fit:contain;border-radius:4px;box-shadow:0 0 80px rgba(185,140,255,.3)}
+.lightbox-cap{margin-top:18px;color:var(--ink);font:14px/1.6 var(--serif);text-align:center;max-width:70vw}
+.lightbox-close{position:absolute;top:24px;right:28px;width:44px;height:44px;border:1px solid var(--line);background:rgba(20,10,40,.5);color:#e8dbff;font:24px/1 var(--serif);cursor:pointer;border-radius:50%;transition:.3s}
+.lightbox-close:hover{background:rgba(107,75,184,.4)}
+@media(max-width:800px){.gallery-grid{grid-template-columns:1fr}.gallery-item img{aspect-ratio:16/11}.hero-caption{left:8vw;bottom:18px}.hero .hero-bg{background-position:center 30%}}
