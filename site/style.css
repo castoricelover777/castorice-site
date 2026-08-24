@@ -17,5 +17,7 @@ body{--ease:cubic-bezier(.2,.8,.2,1)}
 .intro-enter span{font-size:20px;color:#e6b98c}
 .intro-tip{position:absolute;z-index:3;left:50%;bottom:26px;transform:translateX(-50%);color:rgba(233,214,208,.6);font:10px var(--mono);letter-spacing:.18em;pointer-events:none;animation:tipPulse 2.4s ease-in-out infinite}
 @keyframes tipPulse{50%{opacity:.35}}
-.intro-overlay.done{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .9s ease,visibility .9s}
+.intro-overlay{will-change:opacity,filter,transform;transition:opacity .9s ease,filter .9s ease,transform .9s ease,visibility .9s}
+.intro-overlay.leaving{opacity:0;filter:blur(18px);transform:scale(1.04);pointer-events:none}
+.intro-overlay.done{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:700px){.intro-episode{left:8vw;bottom:44px}.intro-enter{right:18px;bottom:26px}.intro-tip{display:none}}

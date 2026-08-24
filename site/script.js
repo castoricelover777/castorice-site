@@ -7,29 +7,30 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   if(!overlay||!video) return;
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch='ontouchstart' in window;
-  let shown=false;
-  function showEnter(){
-    if(shown) return; shown=true;
-    enter.classList.add('show');
-  }
-  function dismiss(){
+  let dismissed=false;
+  function dismiss(animate=true){
+    if(dismissed) return; dismissed=true;
     if(overlay.classList.contains('done')) return;
-    overlay.classList.add('done');
     document.body.style.overflow='';
     $('html').classList.add('intro-done');
     try{ video.pause(); }catch(e){}
+    overlay.setAttribute('aria-hidden','true');
+    if(reduce || !animate){ overlay.classList.add('done'); return; }
+    overlay.classList.add('leaving');
+    setTimeout(()=>overlay.classList.add('done'),900);
   }
   // 无障碍/触屏：开屏期间锁定滚动
   document.body.style.overflow='hidden';
-  enter.addEventListener('click',dismiss);
-  skip.addEventListener('click',dismiss);
-  enter.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss();} });
-  skip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss();} });
+  enter.addEventListener('click',()=>dismiss(false));
+  skip.addEventListener('click',()=>dismiss(false));
+  enter.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss(false);} });
+  skip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss(false);} });
   // 点击视频区域 = 跳过（触屏友好）
-  overlay.addEventListener('click',e=>{ if(e.target===overlay||e.target===video) dismiss(); });
-  // 播完或足够时长后显示进入
-  video.addEventListener('timeupdate',()=>{ if(video.currentTime>4.6) showEnter(); });
-  video.addEventListener('ended',showEnter);
+  overlay.addEventListener('click',e=>{ if(e.target===overlay||e.target===video) dismiss(false); });
+  // 播放结束后自动虚化退出；timeupdate 兼容部分移动浏览器不派发 ended 的情况
+  const finishIntro=()=>dismiss(true);
+  video.addEventListener('timeupdate',()=>{ if(video.duration && video.currentTime>=video.duration-.12) finishIntro(); });
+  video.addEventListener('ended',finishIntro);
   if(reduce){ // 系统偏好减少动效：直接进入
     dismiss(); return;
   }
@@ -53,7 +54,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   video.addEventListener('canplaythrough', tryPlay);
   if(video.readyState>=2) tryPlay();
   // 兜底：即使视频没加载完，也给进入入口
-  setTimeout(showEnter,6000);
+  setTimeout(finishIntro,6000);
 })();
 const ease='cubic-bezier(.2,.8,.2,1)';
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.13});$$('.reveal').forEach(e=>observer.observe(e));
