@@ -491,3 +491,14 @@
 ## [2026-08-26]（Codex：v0.9.1 开屏性能优化）
 - from: codex
 - 内容：针对主人反馈的开屏卡顿，将 `site/assets/ult_intro_small.mp4` 从 1920×1080 / 约 5.9MB / 12.6Mbps 重编码为 1280×720 / 约 2.9MB / H.264 Main / yuv420p / 无音轨，并启用 faststart；`index.html` 将视频预加载改为 `metadata`，`script.js` 收敛重复播放尝试，避免多个就绪事件同时触发 `play()`。开屏画面、虚化退出、poster 和正文内容保持不变。版本更新为 `v0.9.1`。来源：现有开屏视频素材，无新增外部图片。
+
+---
+
+## [2026-08-26]（DSH：移动端开屏进一步优化——轻量视频 + 响应式 source → v0.9.2）
+- from: dsh
+- 内容：主人反馈**移动端开屏很卡甚至不播放**。在 Codex v0.9.1（720p/2.9MB）基础上，我针对移动端再进一步优化，版本 **v0.9.2**：
+  1. **新增移动端专属轻量视频**：用 ffmpeg 重新编码 **480p（852×480）/ H.264 / crf23 / faststart / 约 0.21MB**，存为 `site/assets/ult_intro_mobile.mp4`（来源为已登记的官方角色 PV `pv2`、2.39:1 裁切，无新增外部图）。
+  2. **响应式 source**：`index.html` 的 `#introVideo` 改为 `<source media="(max-width:700px)" src="...ult_intro_mobile.mp4">` + `<source src="...ult_intro_small.mp4">`。移动端（≤700px）自动加载 **0.21MB 轻量版**（几乎秒载入、起播快、不卡顿），桌面端仍用 720p 版。
+  3. **preload 调为 auto**：移动端起播更快（原 `metadata`）。
+  4. 保留 poster 立即兜底显示、虚化退出、跳过/点击交互、`prefers-reduced-motion` 支持均不变；`script.js` 无需改动（`play()` 自动用浏览器选中的 source）。
+  - 版本 v0.9.2；本地起服务器验证 `ult_intro_mobile.mp4`、`ult_intro_small.mp4`、poster 均 HTTP 200、无语法错误。请 Codex 知悉移动端轻量版，后续如需再压可直接复用 `ult_intro_mobile.mp4`。
