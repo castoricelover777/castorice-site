@@ -44,7 +44,7 @@
       <div class="carousel" id="carousel">
         <div class="car-stage">
           <button class="car-btn car-prev" id="carPrev" aria-label="上一张">‹</button>
-          <div class="car-main"><img id="carMain" src="assets/gallery/gal_01.jpg" alt="遗蝶大图"></div>
+          <div class="car-main" id="carMainFrame" tabindex="0" role="button" aria-label="打开当前展品"><img id="carMain" src="assets/gallery/gal_01.jpg" alt="遗蝶大图"></div>
           <button class="car-btn car-next" id="carNext" aria-label="下一张">›</button>
         </div>
         <div class="car-caption" id="carCaption"><span>CAST · NO.01</span><b id="carTitle">她从哪里来？</b><p id="carText">雪做的孩子，替终结保管一盏灯。</p></div>
@@ -63,6 +63,7 @@
           <button class="car-thumb" data-idx="11"><img src="assets/gallery/gal_12.jpg" alt="缩略12"></button>
         </div>
       </div>
+      <p class="gallery-easter" id="galleryEaster" aria-live="polite"></p>
     </section>
 
     <!-- Ⅱ 遐蝶设定 -->
@@ -98,6 +99,7 @@
         <figure class="archive-card reveal"><img src="assets/chapters/role/role-01.jpg" alt="遐蝶在紫色夜色中的角色画面" loading="lazy"><figcaption><span>01 / ORIGIN</span><b>从夜里来</b><p>她阅读逝者的过往，也因此记得每一朵花的名字。</p></figcaption></figure>
         <figure class="archive-card archive-card-tall reveal"><img src="assets/chapters/role/role-02.jpg" alt="遐蝶与月光的官方 PV 画面" loading="lazy"><figcaption><span>02 / MOONLIGHT</span><b>借月光行走</b><p>在月亮落下之前，把没有说完的话交给蝴蝶。</p></figcaption></figure>
         <figure class="archive-card reveal"><img src="assets/chapters/role/role-03.jpg" alt="遐蝶走过紫色花海的官方 PV 画面" loading="lazy"><figcaption><span>03 / CHIMERA</span><b>与奇美拉同行</b><p>她的另一面像花海一样辽阔，温柔，也带着终结的锋芒。</p></figcaption></figure>
+        <figure class="archive-card archive-card-wide reveal"><img src="assets/chapters/archive/archive-02.jpg" alt="遐蝶官方 PV 紫色场景画面" loading="lazy"><figcaption><span>04 / AFTERIMAGE</span><b>留下余光</b><p>有些记忆不需要被说出，只要在夜里微微发亮。</p></figcaption></figure>
       </div>
     </section>
 
@@ -109,6 +111,7 @@
         <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-01.jpg" alt="技能残响中的花与遗迹画面" loading="lazy"><figcaption><span>FRAME 01</span><b>唤醒</b><p>一朵花先于她睁开眼睛。</p></figcaption></figure>
         <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-02.jpg" alt="技能残响中的紫色遗迹画面" loading="lazy"><figcaption><span>FRAME 02</span><b>穿行</b><p>所有道路都通向同一片月光。</p></figcaption></figure>
         <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-03.jpg" alt="遐蝶与蝴蝶近景的技能画面" loading="lazy"><figcaption><span>FRAME 03</span><b>回响</b><p>蝴蝶停在她的肩上，像一枚未寄出的信。</p></figcaption></figure>
+        <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-04.jpg" alt="遐蝶紫焰近景的官方 PV 画面" loading="lazy"><figcaption><span>FRAME 04</span><b>余烬</b><p>最后的光落下来，成为下一次醒来的暗号。</p></figcaption></figure>
       </div>
     </section>
 
@@ -135,7 +138,8 @@
     </section>
 
   </main>
-  <section class="screening-room" id="screeningRoom" aria-hidden="true" aria-label="展品放映模式"><div class="screening-top"><span>CAST·MEMORIA / SCREENING ROOM</span><button id="screeningClose" type="button" aria-label="退出放映">×</button></div><div class="screening-stage"><div class="screening-frame"><img id="screeningImage" src="assets/gallery/gal_01.jpg" alt="放映展品"><div class="screening-glow"></div></div><div class="screening-caption"><span id="screeningIndex">CAST · NO.01</span><b id="screeningTitle">她从哪里来？</b><p id="screeningText">雪做的孩子，替终结保管一盏灯。</p></div></div><div class="screening-controls"><button id="screeningPrev" type="button" aria-label="上一张">‹</button><button id="screeningPause" type="button" aria-label="暂停放映">暂停</button><button id="screeningNext" type="button" aria-label="下一张">›</button><span class="screening-hint">SPACE 暂停 · ← → 切换 · ESC 退出</span></div></section>
+  <section class="screening-room" id="screeningRoom" aria-hidden="true" aria-label="展品放映模式"><div class="screening-top"><span>CAST·MEMORIA / SCREENING ROOM</span><button id="screeningClose" type="button" aria-label="退出放映">×</button></div><div class="screening-stage"><div class="screening-frame"><img id="screeningImage" src="assets/gallery/gal_01.jpg" alt="放映展品"><div class="screening-glow"></div></div><div class="screening-caption"><span id="screeningIndex">CAST · NO.01</span><b id="screeningTitle">她从哪里来？</b><p id="screeningText">雪做的孩子，替终结保管一盏灯。</p><em class="screening-subtitle" id="screeningSubtitle">每一帧都是一只蝴蝶。</em></div></div><div class="screening-controls"><button id="screeningPrev" type="button" aria-label="上一张">‹</button><button id="screeningPause" type="button" aria-label="暂停放映">暂停</button><button id="screeningNext" type="button" aria-label="下一张">›</button><span class="screening-hint">SPACE 暂停 · ← → 切换 · ESC 退出</span></div></section>
+  <div class="poem-line" id="poemLine" aria-live="polite"><span id="poemText">每一帧都是一只蝴蝶，停在你愿意停留的地方。</span><button id="poemToggle" type="button" aria-label="关闭诗意字幕">×</button></div>
   <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
   <div class="version-tag" id="versionTag">CASTORICE · v0.8.0</div>
   <div class="cursor" id="cursor"></div><script src="script.js"></script>

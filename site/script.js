@@ -1,4 +1,5 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const poemLines=['每一帧都是一只蝴蝶，停在你愿意停留的地方。','生死皆为旅途，花会替她记得。','把今天寄给明天，旅途就留下了回声。','当蝴蝶停落枝头，那凋零的又将新生。'];
 
 /* ===== 开屏 intro ===== */
 (function(){
@@ -90,7 +91,7 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
     {t:'持灯者',c:'她不是终结本身，而是替终结保管一盏灯。'},
     {t:'蝴蝶与星',c:'她记得的，是来路，不是归途。'}
   ];
-  const main=$('#carMain'),title=$('#carTitle'),text=$('#carText'),cap=$('#carCaption');
+  const main=$('#carMain'),mainFrame=$('#carMainFrame'),title=$('#carTitle'),text=$('#carText'),cap=$('#carCaption');
   const thumbs=[...document.querySelectorAll('.car-thumb')];
   let idx=0;
   function show(n){
@@ -119,7 +120,17 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   function openLB(){syncLB();lightbox.classList.add('show');document.body.style.overflow='hidden';}
   function closeLB(){lightbox.classList.remove('show');document.body.style.overflow='';}
   function lbNav(d){show(idx+d);syncLB();}
-  main.addEventListener('click',openLB);
+  const easter=$('#galleryEaster');
+  function openGallery(){
+    if(easter&&(idx===2||idx===10)){
+      easter.textContent=idx===2?'“月光知道她没有说完的名字。”':'“替我记住，花曾经认真地开过。”';
+      easter.classList.remove('show');void easter.offsetWidth;easter.classList.add('show');
+      setTimeout(()=>easter.classList.remove('show'),3200);
+    }
+    openLB();
+  }
+  mainFrame.addEventListener('click',openGallery);
+  mainFrame.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openGallery();}});
   lightbox.querySelector('.lightbox-close').addEventListener('click',closeLB);
   lightbox.querySelector('.lightbox-nav.prev').addEventListener('click',e=>{e.stopPropagation();lbNav(-1);});
   lightbox.querySelector('.lightbox-nav.next').addEventListener('click',e=>{e.stopPropagation();lbNav(1);});
@@ -131,14 +142,14 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   show(0);
 
   /* 美术馆放映模式：沿用同一组展品与展签 */
-  const room=$('#screeningRoom'),screenImg=$('#screeningImage'),screenIndex=$('#screeningIndex'),screenTitle=$('#screeningTitle'),screenText=$('#screeningText');
+  const room=$('#screeningRoom'),screenImg=$('#screeningImage'),screenIndex=$('#screeningIndex'),screenTitle=$('#screeningTitle'),screenText=$('#screeningText'),screenSubtitle=$('#screeningSubtitle');
   const launch=$('#screeningLaunch'),closeScreen=$('#screeningClose'),prevScreen=$('#screeningPrev'),nextScreen=$('#screeningNext'),pauseScreen=$('#screeningPause');
   let screeningIdx=0,screeningTimer=null,screeningPlaying=false;
   function syncScreen(n,animate=true){
     screeningIdx=(n+imgs.length)%imgs.length;
     if(animate) screenImg.classList.add('swap');
     setTimeout(()=>{screenImg.src=imgs[screeningIdx];screenImg.alt='放映展品 '+meta[screeningIdx].t;screenImg.classList.remove('swap');},animate?220:0);
-    screenIndex.textContent='CAST · NO.'+String(screeningIdx+1).padStart(2,'0');screenTitle.textContent=meta[screeningIdx].t;screenText.textContent=meta[screeningIdx].c;
+    screenIndex.textContent='CAST · NO.'+String(screeningIdx+1).padStart(2,'0');screenTitle.textContent=meta[screeningIdx].t;screenText.textContent=meta[screeningIdx].c;screenSubtitle.textContent=poemLines[screeningIdx%poemLines.length];
   }
   function stopScreenTimer(){if(screeningTimer){clearInterval(screeningTimer);screeningTimer=null;}}
   function setPlaying(playing){screeningPlaying=playing;stopScreenTimer();pauseScreen.textContent=playing?'暂停':'继续';pauseScreen.setAttribute('aria-label',playing?'暂停放映':'继续放映');if(playing) screeningTimer=setInterval(()=>syncScreen(screeningIdx+1),4200);}
@@ -186,7 +197,32 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)setActive(entry.target.id.replace('chapter-',''));}),{rootMargin:'-42% 0px -42% 0px',threshold:0});
   sections.forEach(section=>observer.observe(section));
   window.addEventListener('scroll',()=>rail.classList.toggle('is-visible',window.scrollY>innerHeight*.55),{passive:true});
-  rail.addEventListener('click',()=>{});
+  links.forEach(link=>link.addEventListener('click',()=>{
+    const target=document.querySelector('#chapter-'+link.dataset.chapter);if(!target)return;
+    target.classList.remove('chapter-pulse');void target.offsetWidth;target.classList.add('chapter-pulse');
+    setTimeout(()=>target.classList.remove('chapter-pulse'),1200);
+  }));
+})();
+/* ===== 蝴蝶/星尘拖尾：仅桌面、限流、可关闭 ===== */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||('ontouchstart' in window)) return;
+  const layer=document.createElement('div');layer.className='cursor-trail-layer';document.body.appendChild(layer);
+  let last=0,count=0;
+  window.addEventListener('pointermove',e=>{
+    if(e.pointerType&&e.pointerType!=='mouse')return;
+    const now=performance.now();if(now-last<55||count>18)return;last=now;count++;
+    const dot=document.createElement('span');dot.className='cursor-trail';dot.textContent=Math.random()>.55?'✦':'·';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';dot.style.setProperty('--r',(Math.random()*70-35)+'deg');layer.appendChild(dot);
+    setTimeout(()=>{dot.remove();count--;},720);
+  },{passive:true});
+})();
+/* ===== 底部诗意字幕：可关闭并记住选择 ===== */
+(function(){
+  const line=$('#poemLine'),text=$('#poemText'),toggle=$('#poemToggle');if(!line||!text||!toggle)return;
+  if(localStorage.getItem('castorice-poem-off')==='1'){line.classList.add('hidden');return;}
+  let i=0,timer;
+  function rotate(){text.classList.add('poem-swap');setTimeout(()=>{i=(i+1)%poemLines.length;text.textContent=poemLines[i];text.classList.remove('poem-swap');},260);}
+  function start(){timer=setInterval(rotate,6200)}
+  toggle.addEventListener('click',()=>{line.classList.add('hidden');localStorage.setItem('castorice-poem-off','1');clearInterval(timer);});start();
 })();
 /* ===== 蝴蝶吸引微交互：光标蝴蝶靠近设定卡片/展品时，卡片上蝴蝶粒子被吸引 ===== */
 (function(){
