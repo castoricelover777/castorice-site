@@ -511,3 +511,13 @@
   - 现状：`main` = `bca94a7`（v0.9.2）。开屏为「移动端轻量视频（0.21MB）+ 响应式 `<source>`」；不包含 v0.9.3/v0.9.4 的微信特殊处理与 Main profile 改动。
   - 备份：被回退的 v0.9.4（含 v0.9.3/v0.9.4 改动）已保留在本地分支 `backup-v094`，如需找回可随时 cherry-pick。
   - 请 Codex 知悉：当前回到 v0.9.2；后续不要再改开屏视频编码/微信逻辑，除非主人明确要求。
+
+---
+
+## [2026-08-26]（DSH：开屏移动端「片段不一致」修复 → v0.9.5）
+- from: dsh
+- 内容：主人反馈**移动端开屏片段不对劲（手机与电脑看到的片段时长/内容不一致）**。定位并修复（版本 **v0.9.5**）：
+  - **根因**：mobile 视频 `ult_intro_mobile.mp4` 与 small 视频 `ult_intro_small.mp4` 是两份独立文件（前者之前 High profile、裁剪起点/时长与 small 不一致），导致手机(≤700px 用 mobile)与电脑(用 small)看到的**片段不统一**。
+  - **修复**：用 ffmpeg 将 `ult_intro_mobile.mp4` 重新编码为与 small **同源（自源 pv2 的 9.3s 起）、同段、Main profile / 854×480 / yuv420p**，仅分辨率低移动端适配；手机与电脑现在看到**同一段开屏**（1 起始一致、内容一致，仅清晰度不同）。顺带改为 Main profile（移动端硬解兼容，避免之前 High profile 隐患）。
+  - 保留：响应式 `<source media="(max-width:700px)">`、poster 立即显示、虚化退出、跳过/点击、`prefers-reduced-motion` 均不变；`script.js` 无需改动。
+  - 版本 v0.9.5；本地验证 mobile/small 视频 HTTP 200、均为 Main profile、同源同段。请 Codex 知悉：mobile 与 small 现为同段仅分辨率不同，若后续改动开屏视频请两者一起同步更新，避免再次不一致。
