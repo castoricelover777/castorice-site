@@ -209,3 +209,32 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 .car-caption{transition:opacity .5s ease,transform .5s ease}
 .car-caption.fade-in{animation:capfade .55s var(--ease)}
 @keyframes capfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ============ 章节叙事 & 设定/尾声 & 回顶部 ============ */
+.chapter-block{position:relative}
+.gallery,.setting,.epilogue{padding-top:130px;padding-bottom:130px}
+.chapter-block+.chapter-block:before{content:"";position:absolute;top:0;left:8vw;right:8vw;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.chapter{display:flex;align-items:baseline;gap:18px;color:var(--muted);font:11px var(--mono);letter-spacing:.2em;margin-bottom:26px}
+.chapter>span{font-size:34px;color:var(--coral);font-family:var(--serif);text-shadow:0 0 18px rgba(231,168,216,.6)}
+.setting-intro{color:var(--muted);font:16px/1.8 var(--serif);margin:0 0 46px}
+.setting-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.setting-card{padding:28px 24px;border:1px solid var(--line);background:linear-gradient(150deg,rgba(58,33,130,.35),rgba(18,9,36,.5));border-radius:4px;transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .4s}
+.setting-card:hover{transform:translateY(-6px);border-color:var(--neon);box-shadow:0 22px 50px rgba(107,75,184,.3)}
+.setting-ico{font-size:26px;display:block;margin-bottom:14px}
+.setting-card h3{font:600 22px/1.2 var(--serif);margin:0 0 10px}
+.setting-card p{margin:0;font:14px/1.7 var(--serif);color:var(--muted)}
+.epilogue-box{max-width:720px;margin:0 auto;text-align:center;padding:70px 30px;border:1px solid var(--line);border-radius:6px;background:radial-gradient(ellipse at 50% 0%,rgba(107,75,184,.25),transparent 70%)}
+.epilogue-quote{font:italic 600 clamp(26px,4vw,40px)/1.4 var(--serif);color:var(--ink);margin:0 0 30px;text-shadow:0 0 30px rgba(185,140,255,.3)}
+.epilogue-about,.epilogue-src{font:15px/1.9 var(--serif);color:var(--muted);margin:0 0 12px}
+.epilogue-about b{color:var(--coral)}
+.epilogue-top{margin-top:26px}
+.to-top{position:fixed;right:26px;bottom:26px;width:46px;height:46px;border:1px solid var(--line);background:rgba(18,9,36,.6);color:#e8dbff;font:20px/1 var(--serif);cursor:pointer;border-radius:50%;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;z-index:40}
+.to-top.show{opacity:1;pointer-events:auto}
+.to-top:hover{background:rgba(107,75,184,.5);transform:translateY(-3px)}
+.intro-tip span{opacity:.7;letter-spacing:.08em}
+@media(max-width:700px){.setting-grid{grid-template-columns:1fr}.to-top{right:16px;bottom:16px}}
+
+/* 蝴蝶吸引：鼠标在卡片上的跟随光晕 */
+.setting-card{position:relative;overflow:hidden}
+.setting-card:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(160px circle at var(--mx,50%) var(--my,50%),rgba(231,168,216,.22),transparent 65%)}
+.setting-card:hover:before{opacity:1}

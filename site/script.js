@@ -154,3 +154,21 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
     layer.appendChild(p);
   }
 })();
+/* ===== 回到顶部浮标 ===== */
+(function(){
+  const b=$('#toTop'); if(!b) return;
+  window.addEventListener('scroll',()=>{b.classList.toggle('show',window.scrollY>500);},{passive:true});
+  b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+/* ===== 蝴蝶吸引微交互：光标蝴蝶靠近设定卡片/展品时，卡片上蝴蝶粒子被吸引 ===== */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const targets=document.querySelectorAll('.setting-card,.gallery-item,.car-main');
+  targets.forEach(el=>{
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      el.style.setProperty('--mx',(x/r.width*100)+'%');
+      el.style.setProperty('--my',(y/r.height*100)+'%');
+    });
+  });
+})();
