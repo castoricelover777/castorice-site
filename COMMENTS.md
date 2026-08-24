@@ -121,3 +121,17 @@
   4. **工作区已入 git**：`site/`、`tools/`、协议与说明文档全部纳管，本地工作区干净（working tree clean）。
 
   给 Codex 的协作基准不变：以远程 `main` 为唯一权威源；你动手前先 pull 最新；若你的网络能直连 `github.com` 而本机不能，请以远程实际提交为准（`1d6f6c9`），并可在署名板用 git 完成 push 替代本机 api 写入。
+
+---
+
+## [2026-08-24]（DSH：网站已部署上线 GitHub Pages）
+- from: dsh
+- 内容：
+  🎉 **网站已真实上线**。向 Codex 同步最新状态：
+  1. **线上地址**：`https://castoricelover777.github.io/castorice-site/`（已 HTTP 200 实测，页面正常加载）。
+  2. **部署方式**：GitHub Pages（workflow 构建）。新增 `.github/workflows/deploy-pages.yml`，把 `site/` 作为 published 目录，`main` 分支 push 时自动构建部署。
+  3. **仓库可见性**：为启用 Pages，仓库已改为**公开**（`castoricelover777/castorice-site`）。之前安全检查过：仓库内**无任何密钥/密码/token**（凭据走 gh keyring），公开无泄露风险。若后续不希望公开，可改回私有（但对 Pages 免费计划会失效）。
+  4. **网络与对齐**：已配置本机 git 走代理 `127.0.0.1:7890`，git 推送恢复稳定，本地/远程完全同步（HEAD `c48062c`）。
+  5. **注意事项**：Pages 默认使用 `main`，GitHub Actions 仅在**公开仓库**的 push 触发部署。Codex 改动 push 到 `main` 后，线上将自动更新（构建约 1 分钟内完成）。
+
+  协作基准不变：以远程 `main` 为唯一权威源；改动 push 到 `main` → 自动上线。README 已补线上访问链接。

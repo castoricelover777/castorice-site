@@ -4,6 +4,8 @@
 
 一个 warm、手工感的单页互动站点：向某个花海缓缓拉进镜头，光点是蝴蝶的记忆；点一朵花，它想起一句将要说的告别。
 
+🌐 **线上访问**：[castoricelover777.github.io/castorice-site](https://castoricelover777.github.io/castorice-site/)
+
 本项目由 **DSH（DeepSeek Harness）与 Codex 双 Agent 协作维护**，版本通过 GitHub 托管。
 
 ---
