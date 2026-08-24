@@ -1,4 +1,48 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+
+/* ===== 开屏 intro ===== */
+(function(){
+  const overlay=$('#introOverlay'), video=$('#introVideo'),
+        skip=$('#introSkip'), enter=$('#introEnter');
+  if(!overlay||!video) return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch='ontouchstart' in window;
+  let shown=false;
+  function showEnter(){
+    if(shown) return; shown=true;
+    enter.classList.add('show');
+  }
+  function dismiss(){
+    if(overlay.classList.contains('done')) return;
+    overlay.classList.add('done');
+    document.body.style.overflow='';
+    $('html').classList.add('intro-done');
+    try{ video.pause(); }catch(e){}
+  }
+  // 无障碍/触屏：开屏期间锁定滚动
+  document.body.style.overflow='hidden';
+  enter.addEventListener('click',dismiss);
+  skip.addEventListener('click',dismiss);
+  enter.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss();} });
+  skip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss();} });
+  // 点击视频区域 = 跳过（触屏友好）
+  overlay.addEventListener('click',e=>{ if(e.target===overlay||e.target===video) dismiss(); });
+  // 播完或足够时长后显示进入
+  video.addEventListener('timeupdate',()=>{ if(video.currentTime>4.6) showEnter(); });
+  video.addEventListener('ended',showEnter);
+  // 自动播放（muted）失败/不支持 → 直接放行
+  const tryPlay=()=>{
+    const p=video.play();
+    if(p&&p.catch){ p.catch(()=>{ /* autoplay blocked: 3s 后仍显示进入 */ setTimeout(showEnter,1200); }); }
+  };
+  if(reduce){ // 系统偏好减少动效：直接进入
+    dismiss(); return;
+  }
+  video.addEventListener('loadeddata',tryPlay);
+  if(video.readyState>=2) tryPlay();
+  // 兜底：即使视频没加载完，也给进入入口
+  setTimeout(showEnter,7000);
+})();
 const ease='cubic-bezier(.2,.8,.2,1)';
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.13});$$('.reveal').forEach(e=>observer.observe(e));
 const cursor=$('#cursor');window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';const art=$('#heroArt');if(art){const x=(e.clientX/innerWidth-.5)*10,y=(e.clientY/innerHeight-.5)*7;art.style.transform=`translate(${x}px,${y}px)`}});

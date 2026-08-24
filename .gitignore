@@ -11,3 +11,6 @@ site/outputs/*.zip
 
 # local snapshots managed by tools/backup.py (not versioned)
 backups/
+
+tools/media/
+

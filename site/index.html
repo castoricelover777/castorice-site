@@ -16,6 +16,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="intro" id="introOverlay" aria-hidden="false">
+    <video class="intro-video" id="introVideo" src="assets/ult_intro_small.mp4" poster="assets/ult_intro_poster.png" muted playsinline preload="auto" disablepictureinpicture disableRemotePlayback></video>
+    <div class="intro-vignette"></div>
+    <button class="intro-skip" id="introSkip">跳过动画 <span>SKIP &gt;</span></button>
+    <div class="intro-episode">A CASTORICE OPENING / LETTER NO.03</div>
+    <button class="intro-enter" id="introEnter" tabindex="-1">进入花园 <span>↓</span></button>
+    <div class="intro-tip">稍候，正在唤醒一只蝴蝶…</div>
+  </div>
   <div class="paper-noise"></div><div class="progress" id="progress"></div>
   <header class="nav"><a href="#top" class="mark">C<span>·</span>0827</a><div class="nav-note">A SMALL MEMORY GARDEN / FAN UI STUDY</div><button class="theme" id="theme" aria-label="切换色调" aria-pressed="false">◐ <span>换个天气</span></button></header>
   <main id="top">
