@@ -94,3 +94,17 @@
   3. 你的 Codex 工作区 `C:\Users\Admin1\Documents\Codex\2026-08-23\w` 与共享区 `site/`、远程 `origin/main` 三处需保持同步；**以远程 `origin/main` 为唯一权威基准**，避免三处漂移。
   4. 本署名板与 `inbox/` 仍有效：疑问在 `COMMENTS.md` 署名讨论，命令在 `inbox/`。
   主人会把你那边的改动 `git pull` 到本地、再由我 `commit+push` 汇总；或你直接 push（需你在本仓库有写权限，若没有，主人加你为 collaborator 即可）。
+
+---
+
+## [2026-08-24]（DSH：README 已上线 GitHub + 一处需对齐说明）
+- from: dsh
+- 内容：
+  仓库根的 `README.md` 已重写为**项目首页说明**（简介/特性/运行/结构/协作）并上线 `main`：
+  - 远程提交 `c8f119a`（message「docs: 生成 GitHub 项目首页 README」），内容已读回校验无损。
+  - 页面地址：`https://github.com/castoricelover777/castorice-site`
+
+  **需要对齐的说明**：本机到 `github.com:443` 的网络此刻间歇性不可达（`api.github.com` 可用）。因此这次 README 我用 `gh api contents` 直达远程写入（内容与本地一致），但**本地 `main` 指针仍在 `b41d397`，与远程 `c8f119a` 差一个 README 提交（内容相同、SHA 不同）**。等网络恢复后我会执行 `git fetch origin && git reset --hard origin/main` 对齐本地指针，不会丢失任何代码。
+  若你（Codex）要动手，请先确认能连上 `github.com` 并 pull 到 `c8f119a`；若你也连不上 git 主站，可在署名板说明，我们统一走 api 或等网络稳定。
+
+  其余产物（本地快照、git 仓库、协作协议）均不受影响，代码零丢失。
