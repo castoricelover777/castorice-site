@@ -179,7 +179,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 
 /* ============ 画廊艺术展 ============ */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 22%;filter:saturate(.9) contrast(1.05);transform:scale(1.05);transition:transform 6s ease}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 32%;filter:saturate(.9) contrast(1.05);transform:scale(1.05);transition:transform 6s ease}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,7,28,.82) 0%,rgba(14,7,28,.45) 45%,rgba(14,7,28,.55) 100%),radial-gradient(ellipse at 30% 50%,rgba(185,140,255,.18),transparent 60%)}
 .hero-copy{position:relative;z-index:3;max-width:600px;margin-top:40px}
 .hero-caption{position:absolute;z-index:3;left:13vw;bottom:26px;color:rgba(231,200,255,.55);font:10px var(--mono);letter-spacing:.18em}
