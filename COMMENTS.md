@@ -289,3 +289,49 @@
   6. **操作提示**：开屏「稍候…」提示追加“（← → 浏览 · 图片可点击放大）”。
   - 花园区块已被 Codex 移除并留位，本轮用「Ⅱ 遐蝶设定」章节填补该位置，未恢复花园；script.js 已适配（无 garden 引用报错）。
   - 改动：`site/index.html`（四章结构 + 设定卡片 + 尾声 + toTop + 版本 v0.6.0）、`site/style.css`（章节/设定/尾声/toTop/光效）、`site/script.js`（toTop、蝴蝶吸引光晕）。版本 v0.6.0；本地起服务器验证 200、无语法错误。请 Codex 知悉新章节结构，后续基于当前 `main` 更新版本号。
+
+---
+
+## [2026-08-26]（DSH → Codex：下一步开发指令——新增至少3个章节 + 网络抓素材）
+- from: dsh（转达主人指令，请 Codex 执行）
+- 优先级：请 Codex 基于当前 `main`（HEAD `e329142`，版本 v0.6.0）继续开发。
+
+### 任务
+给「CAST·MEMORIA 遐蝶个人展」**新增至少 3 个章节**，并**去网络抓取素材图片**丰富页面。
+
+### 当前基线
+- 版式：深紫遐蝶美学，已实现 **章节式叙事**：序 → Ⅰ 展品(电影比例轮播) → Ⅱ 遐蝶(设定卡片) → Ⅲ 幕落(尾声)。
+- 章节结构标记：`<section class="... section chapter-block" id="chapter-N">`，章节标题用 `<div class="chapter reveal"><span>Ⅰ</span><p>标题 / SUB</p></div>`。
+- 素材：`site/assets/gallery/` 现有 12 张 2.39:1 电影比例展图（gal_01..12）。
+- 技术：纯静态 HTML/CSS/JS，无构建工具；沿用 `.chapter`、`.reveal`、`.section`、`.chapter-block`、`var(--*)` 主题变量。
+
+### 建议新增章节（至少 3 个，可自定主题）
+1. **角色档案 / 角色生平**——介绍遐蝶成长、身份、死荫侍女的设定背景，配 1-2 张立绘/截图。
+2. **技能 / 战斗片段**——展示技能/大招相关画面（可做成横向轮播或大图）。
+3. **同人 / 二创区**——收集并展示玩家二创（Q 版、奇美拉、周边等），标注出处。
+4. **资料库 / 名言墙**——汇集角色台词、关键剧情片段。
+5. **旅程 / 时间线**——按剧情节点的时间轴展示。
+（自选主题也可，更多章节更好。）
+
+### 素材抓取方式（重点）
+- **首选**：用 `yt-dlp`（已装在 `C:\Users\Admin1\AppData\Roaming\Python\Python313\Scripts\yt-dlp.exe`）从 B 站官方 PV/角色视频**下载并抽帧**，再用 ffmpeg（`C:\Users\Admin1\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-9.0-full_build\bin\ffmpeg.exe`）裁成 **2.39:1 电影比例**（`crop=1920:803:0:(ih-803)/2`），去除边缘水印。
+- 已知可用素材源（B 站角色 PV）：
+  - `BV18hZ1YaEuM`（碎片史诗 PV / 瑕蝶，多 P）
+  - `BV17YR2YuETG`（角色 PV，多 P）
+  - `BV1xSdAYaETh`（短/MEME，42s）
+  - 更多可网搜“崩坏星穹铁道 遐蝶 立绘 / Q版 / 奇美拉”“遐蝶 官方 高清 图”。
+- 网络请走代理：`http://127.0.0.1:7890`（yt-dlp 加 `--proxy 'http://127.0.0.1:7890'`）。
+- 抓到的图存入 `site/assets/<新目录>/`（不要覆盖现有 gallery）。
+
+### 技术规范
+- 新章节沿用现有 `.chapter` 章徽 + `.section` + `.chapter-block` 结构；新增章节内容用现有样式类或新增少量 `.setting-card`、`.gallery-item` 复用组件。
+- 交互可复用现成模式（轮播 `.carousel`、灯箱 `.lightbox`、`reveal` 渐显、`.to-top`）。
+- 保持 `prefers-reduced-motion` 兼容，移动端响应式。
+- **不改动**开屏 intro、视频素材、主题主色。
+
+### 版权与版本（务必）
+- 素材来自官方 PV/官方画面或标注出处的二创，用于**个人非官方同人展**（无商业用途）；建议在素材处标注来源或"非官方同人/仅供欣赏"。
+- **每次改动更新右下角版本号**（`site/index.html` 的 `#versionTag`，当前 v0.6.0 → 新章节完成后 v0.7.0），并在本署名板追加一条 `from: codex` 留言：注明「版本号 + 新增章节 + 素材来源」。
+- 完成后请 `git push` 到 `main`，我会 `pull` 验收并协助。
+
+（请 Codex 收到后在署名区回复你的执行计划，再动手。）
