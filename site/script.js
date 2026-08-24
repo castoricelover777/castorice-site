@@ -172,3 +172,37 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
     });
   });
 })();
+/* ===== v0.7.1 中段互动组件 ===== */
+(function(){
+  const memoryText=$('#memoryWidgetText');
+  $$('.memory-petal').forEach(p=>p.addEventListener('click',()=>{
+    $$('.memory-petal').forEach(x=>x.classList.remove('active'));
+    p.classList.add('active');
+    memoryText.textContent=p.dataset.memory;
+  }));
+
+  const echoButton=$('#echoToggle'),echoControl=document.querySelector('.echo-control'),skillChapter=$('#chapter-5');
+  if(echoButton&&echoControl&&skillChapter) echoButton.addEventListener('click',()=>{
+    const awake=echoControl.classList.toggle('awake');
+    skillChapter.classList.toggle('echo-awake',awake);
+    $('#echoState').textContent=awake?'残响已唤醒':'残响待机';
+    echoButton.firstChild.textContent=awake?'收束残响 ':'唤醒残响 ';
+  });
+
+  const range=$('#journeyRange'),stage=$('#journeyStage'),timeline=[...document.querySelectorAll('.timeline-item[data-stage]')];
+  const stageNames={1:'01 / 来处',2:'02 / 长夜',3:'03 / 明天'};
+  function selectStage(value){
+    stage.textContent=stageNames[value];
+    timeline.forEach(item=>item.classList.toggle('is-selected',item.dataset.stage===String(value)));
+  }
+  if(range){range.addEventListener('input',()=>selectStage(range.value));selectStage(range.value);}
+
+  const quoteOutput=$('#quoteOutput'),quoteButton=$('#quoteShuffle');
+  const quotes=['“她不是终结本身，而是替终结保管一盏灯。”','“蝴蝶停落枝头，那凋零的又将新生。”','“把今天寄给明天，旅途就会留下回声。”','“请替我记住，花曾经认真地开过。”'];
+  if(quoteButton&&quoteOutput) quoteButton.addEventListener('click',()=>{
+    const current=quoteOutput.dataset.index||'-1';
+    let next=Math.floor(Math.random()*quotes.length);
+    while(String(next)===current) next=(next+1)%quotes.length;
+    quoteOutput.dataset.index=String(next);quoteOutput.textContent=quotes[next];
+  });
+})();

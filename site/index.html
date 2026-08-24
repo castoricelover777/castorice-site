@@ -98,12 +98,17 @@
         <figure class="archive-card archive-card-tall reveal"><img src="assets/chapters/role/role-02.jpg" alt="遐蝶与月光的官方 PV 画面" loading="lazy"><figcaption><span>02 / MOONLIGHT</span><b>借月光行走</b><p>在月亮落下之前，把没有说完的话交给蝴蝶。</p></figcaption></figure>
         <figure class="archive-card reveal"><img src="assets/chapters/role/role-03.jpg" alt="遐蝶走过紫色花海的官方 PV 画面" loading="lazy"><figcaption><span>03 / CHIMERA</span><b>与奇美拉同行</b><p>她的另一面像花海一样辽阔，温柔，也带着终结的锋芒。</p></figcaption></figure>
       </div>
+      <div class="memory-widget reveal" id="memoryWidget">
+        <div><p class="eyebrow">CLICK TO REVEAL / MEMORY SPECIMENS</p><h3>翻开一枚记忆徽章</h3><p id="memoryWidgetText">选择一枚花瓣，听它留下的回声。</p></div>
+        <div class="memory-petals" role="group" aria-label="记忆徽章"><button class="memory-petal" data-memory="她把死亡折成一朵花。" aria-label="记忆徽章一">Ⅰ</button><button class="memory-petal" data-memory="月光照见她未说完的名字。" aria-label="记忆徽章二">Ⅱ</button><button class="memory-petal" data-memory="蝴蝶停落，旅途仍在继续。" aria-label="记忆徽章三">Ⅲ</button></div>
+      </div>
     </section>
 
     <!-- Ⅴ 技能残响 -->
     <section class="chapter-block skill-chapter section" id="chapter-5">
       <div class="chapter reveal"><span>Ⅴ</span><p>技能残响 / SKILL ECHOES</p></div>
       <div class="skill-intro reveal"><p class="eyebrow">MOTION STUDY / 03 FRAGMENTS</p><h2>花瓣落下，<br><em>战斗仍在发光。</em></h2><p>把动作拆成三次停格：唤醒、穿行、回到她自己的夜。</p></div>
+      <div class="echo-control reveal"><span class="echo-dot" id="echoDot"></span><span id="echoState">残响待机</span><button id="echoToggle" type="button">唤醒残响 <b>↗</b></button></div>
       <div class="skill-strip">
         <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-01.jpg" alt="技能残响中的花与遗迹画面" loading="lazy"><figcaption><span>FRAME 01</span><b>唤醒</b><p>一朵花先于她睁开眼睛。</p></figcaption></figure>
         <figure class="skill-frame reveal"><img src="assets/chapters/skills/skill-02.jpg" alt="技能残响中的紫色遗迹画面" loading="lazy"><figcaption><span>FRAME 02</span><b>穿行</b><p>所有道路都通向同一片月光。</p></figcaption></figure>
@@ -114,10 +119,11 @@
     <!-- Ⅵ 旅程时间线 -->
     <section class="chapter-block journey-chapter section" id="chapter-6">
       <div class="chapter reveal"><span>Ⅵ</span><p>旅程 / THE JOURNEY</p></div>
+      <div class="journey-scrubber reveal"><div class="journey-scrubber-head"><span>JOURNEY INDEX</span><b id="journeyStage">01 / 来处</b></div><input id="journeyRange" type="range" min="1" max="3" value="1" step="1" aria-label="选择旅程节点"><div class="journey-scale"><span>来处</span><span>长夜</span><span>明天</span></div></div>
       <div class="timeline">
-        <article class="timeline-item reveal"><div class="timeline-mark">01</div><div class="timeline-copy"><p class="eyebrow">BEFORE THE FLOWERS</p><h3>来处：一场安静的醒来</h3><p>她从夜色和花瓣之间走来，先学会记住，再学会告别。</p></div><img src="assets/chapters/journey/journey-01.jpg" alt="遐蝶旅程起点的紫色花景" loading="lazy"></article>
-        <article class="timeline-item timeline-reverse reveal"><div class="timeline-mark">02</div><div class="timeline-copy"><p class="eyebrow">THE LONG NIGHT</p><h3>中途：穿过长夜</h3><p>奇美拉的影子在远处展开，她仍然向着有灯的地方走。</p></div><img src="assets/chapters/journey/journey-02.jpg" alt="遐蝶旅程中的紫色空间" loading="lazy"></article>
-        <article class="timeline-item reveal"><div class="timeline-mark">03</div><div class="timeline-copy"><p class="eyebrow">A LETTER TO TOMORROW</p><h3>后来：把今天寄给明天</h3><p>旅程没有真正的终点，只有下一次相遇留下的形状。</p></div><img src="assets/chapters/journey/journey-03.jpg" alt="遐蝶走过花海的旅程画面" loading="lazy"></article>
+        <article class="timeline-item reveal" data-stage="1"><div class="timeline-mark">01</div><div class="timeline-copy"><p class="eyebrow">BEFORE THE FLOWERS</p><h3>来处：一场安静的醒来</h3><p>她从夜色和花瓣之间走来，先学会记住，再学会告别。</p></div><img src="assets/chapters/journey/journey-01.jpg" alt="遐蝶旅程起点的紫色花景" loading="lazy"></article>
+        <article class="timeline-item timeline-reverse" data-stage="2"><div class="timeline-mark">02</div><div class="timeline-copy"><p class="eyebrow">THE LONG NIGHT</p><h3>中途：穿过长夜</h3><p>奇美拉的影子在远处展开，她仍然向着有灯的地方走。</p></div><img src="assets/chapters/journey/journey-02.jpg" alt="遐蝶旅程中的 Q 版紫色画面" loading="lazy"></article>
+        <article class="timeline-item reveal" data-stage="3"><div class="timeline-mark">03</div><div class="timeline-copy"><p class="eyebrow">A LETTER TO TOMORROW</p><h3>后来：把今天寄给明天</h3><p>旅程没有真正的终点，只有下一次相遇留下的形状。</p></div><img src="assets/chapters/journey/journey-03.jpg" alt="遐蝶走过花海的旅程画面" loading="lazy"></article>
       </div>
     </section>
 
@@ -126,13 +132,13 @@
       <div class="chapter reveal"><span>Ⅶ</span><p>资料与名言 / ARCHIVE NOTES</p></div>
       <div class="notes-layout">
         <div class="notes-quote reveal"><p>“生死皆为旅途，当蝴蝶停落枝头，那凋零的又将新生。”</p><span>— 遐蝶角色 PV「墓志铭」</span></div>
-        <div class="notes-list reveal"><p><b>展览性质</b> CAST·MEMORIA 是非官方同人个人展，仅供学习与欣赏，无商业用途。</p><p><b>画面来源</b> 本轮新增画面来自官方发布的角色 PV 与视频素材，经过抽帧及电影比例裁切。</p><p><b>出处索引</b> <a href="https://www.bilibili.com/video/BV17YR2YuETG/" target="_blank" rel="noreferrer">角色 PV「墓志铭」</a> · <a href="https://www.bilibili.com/video/BV18hZ1YaEuM/" target="_blank" rel="noreferrer">碎片史诗 PV</a> · <a href="https://www.bilibili.com/video/BV1xSdAYaETh/" target="_blank" rel="noreferrer">短片素材</a></p></div>
+        <div class="notes-list reveal"><p><b>展览性质</b> CAST·MEMORIA 是非官方同人个人展，仅供学习与欣赏，无商业用途。</p><p><b>画面来源</b> 本轮新增画面来自官方发布的角色 PV 与视频素材，经过抽帧及电影比例裁切。</p><p><b>出处索引</b> <a href="https://www.bilibili.com/video/BV17YR2YuETG/" target="_blank" rel="noreferrer">角色 PV「墓志铭」</a> · <a href="https://www.bilibili.com/video/BV18hZ1YaEuM/" target="_blank" rel="noreferrer">碎片史诗 PV</a> · <a href="https://www.bilibili.com/video/BV1xSdAYaETh/" target="_blank" rel="noreferrer">短片素材</a></p><button class="quote-shuffle" id="quoteShuffle" type="button">抽取一条展签 <span>✦</span></button><p class="quote-output" id="quoteOutput" aria-live="polite">点击按钮，让档案随机翻页。</p></div>
       </div>
       <a href="#top" class="hand-link epilogue-top reveal">回到序章 <b>↑</b></a>
     </section>
 
   </main>
   <button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
-  <div class="version-tag" id="versionTag">CASTORICE · v0.7.0</div>
+  <div class="version-tag" id="versionTag">CASTORICE · v0.7.1</div>
   <div class="cursor" id="cursor"></div><script src="script.js"></script>
 </body></html>

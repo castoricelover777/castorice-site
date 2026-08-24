@@ -284,3 +284,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 .archive-notes>.epilogue-top{display:inline-flex}
 @media(max-width:800px){.archive-chapter,.skill-chapter,.journey-chapter,.archive-notes{padding-top:100px;padding-bottom:110px}.archive-grid,.skill-strip,.notes-layout{grid-template-columns:1fr}.archive-card:nth-child(2){margin-top:0}.timeline-item,.timeline-item.timeline-reverse{grid-template-columns:42px 1fr;gap:16px}.timeline-item img,.timeline-item.timeline-reverse img{grid-column:2;grid-row:2;width:100%}.timeline-item.timeline-reverse .timeline-copy{grid-column:2;grid-row:1}.timeline-item.timeline-reverse .timeline-mark{grid-column:1;grid-row:1}.timeline-copy h3{font-size:24px}.nav-links{gap:10px;overflow-x:auto;max-width:64vw}.nav-link{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.archive-card,.archive-card img,.skill-frame img,.timeline-item img{transition:none}.setting-card:hover,.archive-card:hover,.skill-frame:hover img,.timeline-item:hover img{transform:none}}
+
+/* ============ v0.7.1 中段互动组件 ============ */
+.memory-widget{display:flex;justify-content:space-between;align-items:center;gap:40px;margin-top:70px;padding:28px 30px;border:1px solid var(--line);background:linear-gradient(105deg,rgba(58,33,130,.42),rgba(18,9,36,.28));border-radius:4px}
+.memory-widget h3{font:600 28px var(--serif);margin:10px 0 4px;color:var(--ink)}
+.memory-widget p:not(.eyebrow){margin:0;color:var(--muted);font:15px/1.7 var(--serif)}
+.memory-petals{display:flex;gap:16px;align-items:center}
+.memory-petal{width:58px;height:76px;border:1px solid var(--coral);border-radius:58% 42% 58% 42%;background:linear-gradient(145deg,rgba(231,168,216,.38),rgba(107,75,184,.25));color:var(--ink);font:22px var(--serif);cursor:pointer;transform:rotate(25deg);transition:transform .35s var(--ease),background .35s,box-shadow .35s}
+.memory-petal:hover,.memory-petal.active{transform:rotate(0) translateY(-6px);background:rgba(185,140,255,.42);box-shadow:0 0 25px rgba(201,155,255,.35)}
+.echo-control{display:flex;align-items:center;gap:12px;margin:-28px 0 46px;padding:12px 14px;border-top:1px solid rgba(185,140,255,.25);border-bottom:1px solid rgba(185,140,255,.25);color:var(--muted);font:10px var(--mono);letter-spacing:.12em}
+.echo-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);box-shadow:0 0 0 transparent;transition:.4s}
+.echo-control.awake .echo-dot{background:var(--coral);box-shadow:0 0 18px var(--coral)}
+.echo-control button,.quote-shuffle{margin-left:auto;border:1px solid var(--line);background:rgba(58,33,130,.35);color:var(--ink);padding:9px 13px;font:10px var(--mono);cursor:pointer;transition:.3s}
+.echo-control button:hover,.quote-shuffle:hover{border-color:var(--neon);background:rgba(107,75,184,.45)}
+.skill-chapter.echo-awake .skill-frame img{filter:saturate(1.3) brightness(1.14);box-shadow:0 0 35px rgba(185,140,255,.35)}
+.journey-scrubber{max-width:720px;margin:50px 0 30px;padding:20px 22px;border:1px solid var(--line);background:rgba(18,9,36,.38)}
+.journey-scrubber-head{display:flex;justify-content:space-between;color:var(--muted);font:10px var(--mono);letter-spacing:.15em}
+.journey-scrubber-head b{color:var(--coral);font-weight:400}
+.journey-scrubber input{width:100%;margin:20px 0 8px;accent-color:var(--coral);cursor:pointer}
+.journey-scale{display:flex;justify-content:space-between;color:var(--muted);font:11px var(--serif)}
+.timeline-item{opacity:.48;transition:opacity .5s,transform .5s var(--ease)}
+.timeline-item.is-selected{opacity:1;transform:translateX(8px)}
+.timeline-item.timeline-reverse.is-selected{transform:translateX(-8px)}
+.quote-shuffle{display:block;margin:25px 0 0}
+.quote-output{min-height:30px!important;margin-top:16px!important;color:var(--coral)!important;font-style:italic}
+@media(max-width:800px){.memory-widget{display:block}.memory-petals{margin-top:24px;justify-content:center}.echo-control{margin-top:-10px}.journey-scrubber{margin-top:30px}.timeline-item.is-selected,.timeline-item.timeline-reverse.is-selected{transform:none}}
+@media(prefers-reduced-motion:reduce){.memory-petal,.echo-dot,.echo-control button,.quote-shuffle,.timeline-item{transition:none}.timeline-item{opacity:1}}
