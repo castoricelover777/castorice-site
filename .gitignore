@@ -1,0 +1,13 @@
+﻿# dependencies / build
+node_modules/
+dist/
+build/
+
+# site runtime
+*.log
+
+# backups are versioned separately (kept out of git to avoid bloat)
+site/outputs/*.zip
+
+# local snapshots managed by tools/backup.py (not versioned)
+backups/

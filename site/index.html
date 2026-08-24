@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CASTORICE / 一页未寄出的信</title>
+  <meta name="description" content="CASTORICE / 一页未寄出的信 — 个人互动展示站，关于一只蝴蝶、一座记忆花园，和一个替终结保管一盏灯的人。">
+  <meta name="theme-color" content="#efe4d1">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CASTORICE / 一页未寄出的信">
+  <meta property="og:description" content="个人互动展示站 — 一只蝴蝶、一座记忆花园。动一下，花就醒了。">
+  <meta property="og:site_name" content="CASTORICE">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23efe4d1'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' fill='%23713b4a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="paper-noise"></div><div class="progress" id="progress"></div>
+  <header class="nav"><a href="#top" class="mark">C<span>·</span>0827</a><div class="nav-note">A SMALL MEMORY GARDEN / FAN UI STUDY</div><button class="theme" id="theme" aria-label="切换色调" aria-pressed="false">◐ <span>换个天气</span></button></header>
+  <main id="top">
+    <section class="hero section"><div class="hero-copy reveal"><p class="eyebrow">LETTER NO. 03 / 哀地里亚</p><h1>写给<br><i>一只蝴蝶</i>。</h1><p class="intro">有些人从雪里来。她把死亡折成一朵花，又把花留给还在路上的人。</p><a href="#letter" class="hand-link">打开这封信 <b>↓</b></a></div><div class="hero-art" id="heroArt"><div class="moon"></div><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="thread"></div><span class="scribble">castorice<br>— memory in bloom</span></div><div class="hero-stamp">FOR THE ONE<br>WHO REMEMBERS</div></section>
+    <section class="letter section" id="letter"><div class="chapter reveal"><span>01</span><p>一页 / THE LETTER</p></div><div class="letter-grid"><div class="letter-copy reveal"><p class="eyebrow">DEAR CASTORICE,</p><h2>我想把今天<br><em>寄给明天。</em></h2><p>不是为了挽留什么。只是想告诉你：那些短暂经过的花、月亮和雪，都曾经认真地活过。</p><button class="underlined" id="openNote">读一段旁注 <span>＋</span></button><div class="note" id="note">P.S. 如果你看见一只紫色蝴蝶，请替我问问它，春天是不是已经到了。</div></div><div class="letter-card reveal"><div class="card-top"><span>哀地里亚</span><span>03.2 / 2025</span></div><div class="card-drawing"><div class="butterfly"><i></i><i></i><i></i><i></i><b>✦</b></div><span>一封没有地址的信</span></div><div class="card-bottom">死荫的侍女 / MEMORY KEEPER</div></div></div></section>
+    <section class="garden section" id="garden"><div class="chapter reveal"><span>02</span><p>花园 / THE GARDEN</p></div><div class="garden-head reveal"><h2>动一下，<br><em>花就醒了。</em></h2><p>把光标放进花海。点击一朵花，看看它记住了什么。</p></div><div class="garden-box reveal" id="gardenBox"><canvas id="gardenCanvas"></canvas><div class="garden-label">LIVE MEMORY / <span id="flowerCount">00</span> BLOOMS</div><button class="seed" id="seed">✦ <span>种下一枚记忆</span></button><div class="memory-pop" id="memoryPop">“所有的告别，都会在某个清晨重新开花。”</div></div></section>
+    <section class="archive section" id="archive"><div class="chapter reveal"><span>03</span><p>档案 / THE ARCHIVE</p></div><div class="archive-list"><button class="archive-row reveal" data-copy="她不是终结本身，而是替终结保管一盏灯。"><span>01</span><b>她从哪里来？</b><i>↗</i></button><button class="archive-row reveal" data-copy="花瓣落下的时候，时间会短暂地停在原地。"><span>02</span><b>她在等待什么？</b><i>↗</i></button><button class="archive-row reveal" data-copy="死亡并不带走所有东西。它留下了下一次相遇的形状。"><span>03</span><b>她记得什么？</b><i>↗</i></button></div><p class="archive-answer" id="archiveAnswer">点击一行，听听它的回声。</p></section>
+  </main>
+  <footer class="footer"><span>CASTORICE / ORIGINAL FAN UI STUDY</span><span>made slowly, with a little weather</span><a href="#top">↑</a></footer>
+  <div class="cursor" id="cursor"></div><script src="script.js"></script>
+</body></html>
