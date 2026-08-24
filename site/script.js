@@ -127,8 +127,25 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   window.addEventListener('keydown',e=>{if(e.key==='Escape') closeLB();});
   window.addEventListener('keydown',e=>{if(lightbox.classList.contains('show')){if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);}});
   // 轮播图键盘左右切换（非灯箱时）
-  window.addEventListener('keydown',e=>{if(!lightbox.classList.contains('show')){if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);}});
+  window.addEventListener('keydown',e=>{if(!lightbox.classList.contains('show')&&!document.querySelector('.screening-room.show')){if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);}});
   show(0);
+
+  /* 美术馆放映模式：沿用同一组展品与展签 */
+  const room=$('#screeningRoom'),screenImg=$('#screeningImage'),screenIndex=$('#screeningIndex'),screenTitle=$('#screeningTitle'),screenText=$('#screeningText');
+  const launch=$('#screeningLaunch'),closeScreen=$('#screeningClose'),prevScreen=$('#screeningPrev'),nextScreen=$('#screeningNext'),pauseScreen=$('#screeningPause');
+  let screeningIdx=0,screeningTimer=null,screeningPlaying=false;
+  function syncScreen(n,animate=true){
+    screeningIdx=(n+imgs.length)%imgs.length;
+    if(animate) screenImg.classList.add('swap');
+    setTimeout(()=>{screenImg.src=imgs[screeningIdx];screenImg.alt='放映展品 '+meta[screeningIdx].t;screenImg.classList.remove('swap');},animate?220:0);
+    screenIndex.textContent='CAST · NO.'+String(screeningIdx+1).padStart(2,'0');screenTitle.textContent=meta[screeningIdx].t;screenText.textContent=meta[screeningIdx].c;
+  }
+  function stopScreenTimer(){if(screeningTimer){clearInterval(screeningTimer);screeningTimer=null;}}
+  function setPlaying(playing){screeningPlaying=playing;stopScreenTimer();pauseScreen.textContent=playing?'暂停':'继续';pauseScreen.setAttribute('aria-label',playing?'暂停放映':'继续放映');if(playing) screeningTimer=setInterval(()=>syncScreen(screeningIdx+1),4200);}
+  function openScreen(){room.classList.add('show');room.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';syncScreen(0,false);setPlaying(true);closeScreen.focus();}
+  function closeScreening(){room.classList.remove('show');room.setAttribute('aria-hidden','true');document.body.style.overflow='';stopScreenTimer();screeningPlaying=false;launch.focus();}
+  launch.addEventListener('click',openScreen);closeScreen.addEventListener('click',closeScreening);prevScreen.addEventListener('click',()=>syncScreen(screeningIdx-1));nextScreen.addEventListener('click',()=>syncScreen(screeningIdx+1));pauseScreen.addEventListener('click',()=>setPlaying(!screeningPlaying));
+  window.addEventListener('keydown',e=>{if(!room.classList.contains('show'))return;if(e.key==='Escape'){e.preventDefault();closeScreening();}else if(e.key===' '){e.preventDefault();setPlaying(!screeningPlaying);}else if(e.key==='ArrowLeft'){e.preventDefault();syncScreen(screeningIdx-1);}else if(e.key==='ArrowRight'){e.preventDefault();syncScreen(screeningIdx+1);}});
 })();
 /* ===== 背景飘落花瓣 / 蝴蝶粒子 ===== */
 (function(){
@@ -159,6 +176,17 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
   const b=$('#toTop'); if(!b) return;
   window.addEventListener('scroll',()=>{b.classList.toggle('show',window.scrollY>500);},{passive:true});
   b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+/* ===== 章节侧边指示 ===== */
+(function(){
+  const rail=$('#chapterRail');if(!rail)return;
+  const links=[...rail.querySelectorAll('a[data-chapter]')];
+  const sections=links.map(link=>document.querySelector('#chapter-'+link.dataset.chapter)).filter(Boolean);
+  const setActive=id=>links.forEach(link=>link.classList.toggle('active',link.dataset.chapter===id));
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)setActive(entry.target.id.replace('chapter-',''));}),{rootMargin:'-42% 0px -42% 0px',threshold:0});
+  sections.forEach(section=>observer.observe(section));
+  window.addEventListener('scroll',()=>rail.classList.toggle('is-visible',window.scrollY>innerHeight*.55),{passive:true});
+  rail.addEventListener('click',()=>{});
 })();
 /* ===== 蝴蝶吸引微交互：光标蝴蝶靠近设定卡片/展品时，卡片上蝴蝶粒子被吸引 ===== */
 (function(){
