@@ -21,3 +21,8 @@ body{--ease:cubic-bezier(.2,.8,.2,1)}
 .intro-overlay.leaving{opacity:0;filter:blur(18px);transform:scale(1.04);pointer-events:none}
 .intro-overlay.done{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:700px){.intro-episode{left:8vw;bottom:44px}.intro-enter{right:18px;bottom:26px}.intro-tip{display:none}}
+/* 右下角版本标签 */
+.version-tag{position:fixed;right:20px;bottom:14px;z-index:40;color:var(--muted);font:10px var(--mono);letter-spacing:.14em;opacity:.6;pointer-events:none;transition:opacity .4s}
+.version-tag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:7px;vertical-align:middle;opacity:.8}
+body.dark .version-tag{color:#b99aa0}
+@media(max-width:700px){.version-tag{right:14px;bottom:10px}}
