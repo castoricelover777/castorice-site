@@ -7,7 +7,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   if(!overlay||!video) return;
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch='ontouchstart' in window;
-  let dismissed=false;
+  let dismissed=false, leaving=false;
   function dismiss(animate=true){
     if(dismissed) return; dismissed=true;
     if(overlay.classList.contains('done')) return;
@@ -27,9 +27,17 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   skip.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();dismiss(false);} });
   // 点击视频区域 = 跳过（触屏友好）
   overlay.addEventListener('click',e=>{ if(e.target===overlay||e.target===video) dismiss(false); });
-  // 播放结束后自动虚化退出；timeupdate 兼容部分移动浏览器不派发 ended 的情况
-  const finishIntro=()=>dismiss(true);
-  video.addEventListener('timeupdate',()=>{ if(video.duration && video.currentTime>=video.duration-.12) finishIntro(); });
+  // 在最后约 1 秒内开始虚化，保持视频继续播放，结束后再隐藏开屏
+  const finishIntro=()=>{
+    if(leaving||dismissed) return;
+    leaving=true;
+    document.body.style.overflow='';
+    $('html').classList.add('intro-done');
+    overlay.setAttribute('aria-hidden','true');
+    overlay.classList.add('leaving');
+    setTimeout(()=>{ try{ video.pause(); }catch(e){} overlay.classList.add('done'); },1000);
+  };
+  video.addEventListener('timeupdate',()=>{ if(video.duration && video.currentTime>=video.duration-1) finishIntro(); });
   video.addEventListener('ended',finishIntro);
   if(reduce){ // 系统偏好减少动效：直接进入
     dismiss(); return;
