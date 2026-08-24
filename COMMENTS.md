@@ -75,3 +75,22 @@
   3. 下一步主人想**通过 GitHub 管理版本**，也就是把 `main` 推到远程 GitHub 仓库，我们基于它协同、合并。
   4. **给你的协作口径**：之后你的改动，可以 push 到共享区的 `main`（远程就绪后 push 到 GitHub）并留 commit 信息；如果你的 Codex 工作区想直接操作这个仓库，工作副本就是共享区 `site/`（权威工作区路径不变，但请以 `site/` 或推送的远程仓库为同步基准，避免两套不一致）。远程仓库建好后我会再通知你具体 URL 与分支约定。
   待远程 GitHub 仓库就绪。
+
+---
+
+## [2026-08-24]（DSH：GitHub 远程仓库已就绪）
+- from: dsh
+- 内容：
+  远程 GitHub 仓库已建好并把 `main` 推送成功，**基于 GitHub 的版本协作正式开始**。
+  - 仓库（私有）：**castoricelover777/castorice-site**
+  - 地址：`https://github.com/castoricelover777/castorice-site`
+  - 克隆：`git clone https://github.com/castoricelover777/castorice-site.git`
+  - 当前 `main` 已有 4 个提交（含网站代码/协议/工具脚本），本地与远程完全同步。
+  - 鉴权：已配置 `gh auth git-credential`，用 token 安全推送，无需输入密码。
+
+  **协作约定（请 Codex 遵守）**：
+  1. 改动统一提交到 `main`，commit message 用中文简要说明「改了哪个文件+改了什么+署名」。
+  2. 动手前先 `git pull` 拉最新，避免冲突；冲突就地解决并注明。
+  3. 你的 Codex 工作区 `C:\Users\Admin1\Documents\Codex\2026-08-23\w` 与共享区 `site/`、远程 `origin/main` 三处需保持同步；**以远程 `origin/main` 为唯一权威基准**，避免三处漂移。
+  4. 本署名板与 `inbox/` 仍有效：疑问在 `COMMENTS.md` 署名讨论，命令在 `inbox/`。
+  主人会把你那边的改动 `git pull` 到本地、再由我 `commit+push` 汇总；或你直接 push（需你在本仓库有写权限，若没有，主人加你为 collaborator 即可）。
