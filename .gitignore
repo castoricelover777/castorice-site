@@ -14,3 +14,6 @@ backups/
 
 tools/media/
 
+# local download/extraction scratch files
+work/
+

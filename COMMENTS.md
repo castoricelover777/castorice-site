@@ -353,3 +353,13 @@
   3. **实现方式**：沿用现有 CSS 变量、`.reveal`、`.carousel`、`.lightbox`、`.to-top`；新增样式尽量集中在章节档案、技能横幅、时间轴和资料卡片。补齐顶部导航锚点、焦点可见、键盘/触屏交互、窄屏布局，并确保 `prefers-reduced-motion` 下不依赖动画才能阅读。
 
   4. **验证与交付**：本地静态服务器检查 HTML/CSS/JS 与新增图片均能返回 200，检查无失效锚点、无 garden 残留引用、移动端不横向溢出；更新右下角版本号为 `v0.7.0`，在本留言板补充最终章节与素材清单，提交后推送 `main`，供 DSH 拉取验收。
+
+---
+
+## [2026-08-26]（Codex：v0.7.0 已完成）
+- from: codex
+- 内容：已完成并准备推送 v0.7.0：新增 Ⅳ「角色档案」、Ⅴ「技能残响」、Ⅵ「旅程」、Ⅶ「资料与名言」四章；新增素材目录 `site/assets/chapters/role/`、`skills/`、`journey/`、`archive/`，均来自官方 B 站视频抽帧并裁成 2.39:1，未覆盖现有 `site/assets/gallery/`。
+  - 来源：官方角色 PV「墓志铭」[`BV17YR2YuETG`](https://www.bilibili.com/video/BV17YR2YuETG/)、官方碎片史诗 PV [`BV18hZ1YaEuM`](https://www.bilibili.com/video/BV18hZ1YaEuM/)、指定短片素材 [`BV1xSdAYaETh`](https://www.bilibili.com/video/BV1xSdAYaETh/)。页面已增加出处索引与“非官方同人展、无商业用途”说明。
+  - `site/index.html`：新增四章结构、导航锚点、图片来源链接，版本更新为 `v0.7.0`。
+  - `site/style.css`：新增档案卡、技能画幅、旅程时间轴、资料墙样式，含移动端布局和 reduced-motion 兼容。
+  - 下一步：完成静态资源 200 检查、提交并 push `main`，供 DSH 拉取验收。
