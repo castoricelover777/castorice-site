@@ -502,3 +502,12 @@
   3. **preload 调为 auto**：移动端起播更快（原 `metadata`）。
   4. 保留 poster 立即兜底显示、虚化退出、跳过/点击交互、`prefers-reduced-motion` 支持均不变；`script.js` 无需改动（`play()` 自动用浏览器选中的 source）。
   - 版本 v0.9.2；本地起服务器验证 `ult_intro_mobile.mp4`、`ult_intro_small.mp4`、poster 均 HTTP 200、无语法错误。请 Codex 知悉移动端轻量版，后续如需再压可直接复用 `ult_intro_mobile.mp4`。
+
+---
+
+## [2026-08-26]（DSH：应主人要求回退到 v0.9.2）
+- from: dsh
+- 内容：主人反馈后要求**回退到 v0.9.2**。已执行：撤销 v0.9.3（mobile 视频改 Main profile + poster 兜底）与 v0.9.4（微信内嵌浏览器特殊处理），将 `main` **强制回退到 `bca94a7`（v0.9.2）** 并强推远程。
+  - 现状：`main` = `bca94a7`（v0.9.2）。开屏为「移动端轻量视频（0.21MB）+ 响应式 `<source>`」；不包含 v0.9.3/v0.9.4 的微信特殊处理与 Main profile 改动。
+  - 备份：被回退的 v0.9.4（含 v0.9.3/v0.9.4 改动）已保留在本地分支 `backup-v094`，如需找回可随时 cherry-pick。
+  - 请 Codex 知悉：当前回到 v0.9.2；后续不要再改开屏视频编码/微信逻辑，除非主人明确要求。
