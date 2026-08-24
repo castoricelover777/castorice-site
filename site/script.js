@@ -30,18 +30,30 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   // 播完或足够时长后显示进入
   video.addEventListener('timeupdate',()=>{ if(video.currentTime>4.6) showEnter(); });
   video.addEventListener('ended',showEnter);
-  // 自动播放（muted）失败/不支持 → 直接放行
-  const tryPlay=()=>{
-    const p=video.play();
-    if(p&&p.catch){ p.catch(()=>{ /* autoplay blocked: 3s 后仍显示进入 */ setTimeout(showEnter,1200); }); }
-  };
   if(reduce){ // 系统偏好减少动效：直接进入
     dismiss(); return;
   }
-  video.addEventListener('loadeddata',tryPlay);
+  // 确保静音（否则部分浏览器阻止自动播放）
+  video.muted=true; video.defaultMuted=true; video.autoplay=true; video.loop=false;
+  let plays=0;
+  const tryPlay=()=>{
+    plays++;
+    const p=video.play();
+    if(p&&p.catch){
+      p.then(()=>{ /* playing */ }).catch(()=>{
+        // 首次可能因未就绪/被暂缓而失败；稍后重试
+        if(video.paused && plays<3 && !video.ended){
+          setTimeout(tryPlay, 600);
+        }
+      });
+    }
+  };
+  video.addEventListener('loadeddata', tryPlay);
+  video.addEventListener('canplay', tryPlay);
+  video.addEventListener('canplaythrough', tryPlay);
   if(video.readyState>=2) tryPlay();
   // 兜底：即使视频没加载完，也给进入入口
-  setTimeout(showEnter,7000);
+  setTimeout(showEnter,6000);
 })();
 const ease='cubic-bezier(.2,.8,.2,1)';
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.13});$$('.reveal').forEach(e=>observer.observe(e));
