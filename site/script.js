@@ -66,8 +66,10 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 })();
 const ease='cubic-bezier(.2,.8,.2,1)';
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.13});$$('.reveal').forEach(e=>observer.observe(e));
-const cursor=$('#cursor');window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';const art=$('#heroArt');if(art){const x=(e.clientX/innerWidth-.5)*10,y=(e.clientY/innerHeight-.5)*7;art.style.transform=`translate(${x}px,${y}px)`}});
-$$('.hand-link,.gallery-item,.theme,.seed').forEach(e=>{e.addEventListener('pointerenter',()=>{cursor.style.width='28px';cursor.style.height='28px'});e.addEventListener('pointerleave',()=>{cursor.style.width='14px';cursor.style.height='14px'})});
+const cursor=$('#cursor');const heroBg=document.querySelector('.hero-bg');window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+/* 滚动视差：hero 大图随滚动慢移 + 三区块渐显 */
+window.addEventListener('scroll',()=>{ if(heroBg){heroBg.style.transform=`translateY(${scrollY*0.12}px) scale(1.05)`;} },{passive:true});
+$$('.hand-link,.car-main,.theme,.seed,.nav-link,.car-btn,.car-thumb').forEach(e=>{e.addEventListener('pointerenter',()=>{cursor.style.width='34px';cursor.style.height='32px'});e.addEventListener('pointerleave',()=>{cursor.style.width='26px';cursor.style.height='24px'})});
 window.addEventListener('scroll',()=>{$('#progress').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'});
 $('#theme').addEventListener('click',()=>{const dark=document.body.classList.toggle('dark');$('#theme').setAttribute('aria-pressed',dark)});
 /* ===== 横向电影图集轮播 ===== */
@@ -98,22 +100,34 @@ $('#theme').addEventListener('click',()=>{const dark=document.body.classList.tog
     cap.querySelector('span').textContent='CAST · NO.'+String(idx+1).padStart(2,'0');
     title.textContent=meta[idx].t; text.textContent=meta[idx].c;
     thumbs.forEach((t,i)=>t.classList.toggle('active',i===idx));
+    // 展签淡入
+    cap.classList.remove('fade-in'); void cap.offsetWidth; cap.classList.add('fade-in');
   }
+  // 移动端触屏左右滑动切换
+  let tx=null;
+  main.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  main.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>45){dx<0?show(idx+1):show(idx-1);}tx=null;},{passive:true});
   $('#carPrev').addEventListener('click',()=>show(idx-1));
   $('#carNext').addEventListener('click',()=>show(idx+1));
   thumbs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.idx)));
-  // 主图点击全屏查看
+  // 主图点击全屏查看（灯箱，含上一张/下一张）
   const lightbox=document.createElement('div');lightbox.className='lightbox';
-  lightbox.innerHTML='<img class="lightbox-img" alt=""><div class="lightbox-cap"></div><button class="lightbox-close" aria-label="关闭">×</button>';
+  lightbox.innerHTML='<button class="lightbox-close" aria-label="关闭">×</button><button class="lightbox-nav prev" aria-label="上一张">‹</button><img class="lightbox-img" alt=""><button class="lightbox-nav next" aria-label="下一张">›</button><div class="lightbox-cap"></div>';
   document.body.appendChild(lightbox);
-  function openLB(){const img=lightbox.querySelector('.lightbox-img'),c=lightbox.querySelector('.lightbox-cap');img.src=main.src;c.textContent=title.textContent+' — '+text.textContent;lightbox.classList.add('show');document.body.style.overflow='hidden';}
+  const L_img=lightbox.querySelector('.lightbox-img'),L_cap=lightbox.querySelector('.lightbox-cap');
+  function syncLB(){L_img.src=imgs[idx];L_cap.textContent='CAST · NO.'+String(idx+1).padStart(2,'0')+' — '+meta[idx].t+'：'+meta[idx].c;}
+  function openLB(){syncLB();lightbox.classList.add('show');document.body.style.overflow='hidden';}
   function closeLB(){lightbox.classList.remove('show');document.body.style.overflow='';}
+  function lbNav(d){show(idx+d);syncLB();}
   main.addEventListener('click',openLB);
   lightbox.querySelector('.lightbox-close').addEventListener('click',closeLB);
+  lightbox.querySelector('.lightbox-nav.prev').addEventListener('click',e=>{e.stopPropagation();lbNav(-1);});
+  lightbox.querySelector('.lightbox-nav.next').addEventListener('click',e=>{e.stopPropagation();lbNav(1);});
   lightbox.addEventListener('click',e=>{if(e.target===lightbox) closeLB();});
   window.addEventListener('keydown',e=>{if(e.key==='Escape') closeLB();});
-  // 键盘左右切换
-  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});
+  window.addEventListener('keydown',e=>{if(lightbox.classList.contains('show')){if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);}});
+  // 轮播图键盘左右切换（非灯箱时）
+  window.addEventListener('keydown',e=>{if(!lightbox.classList.contains('show')){if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);}});
   show(0);
 })();
 const canvas=$('#gardenCanvas'),ctx=canvas.getContext('2d'),box=$('#gardenBox'),pop=$('#memoryPop'),seed=$('#seed'),count=$('#flowerCount');let flowers=[],pointer={x:.5,y:.5};
@@ -123,3 +137,27 @@ for(let i=0;i<22;i++)makeFlower();count.textContent=String(flowers.length).padSt
 box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width;pointer.y=(e.clientY-r.top)/r.height});box.addEventListener('pointerleave',()=>{pointer.x=.5;pointer.y=.5});
 seed.addEventListener('click',()=>{makeFlower(.5+(Math.random()-.5)*.35,.55+(Math.random()-.5)*.35,1);count.textContent=String(flowers.length).padStart(2,'0');pop.classList.add('show');setTimeout(()=>pop.classList.remove('show'),2400)});
 function draw(t){const r=box.getBoundingClientRect(),w=r.width,h=r.height;ctx.clearRect(0,0,w,h);flowers.forEach(f=>{f.phase+=.008*f.speed;const px=f.x*w+(pointer.x-.5)*25,py=f.y*h+Math.sin(f.phase)*10+(pointer.y-.5)*18;ctx.beginPath();ctx.fillStyle=f.hue;ctx.globalAlpha=.25+.55*f.life;ctx.shadowBlur=13;ctx.shadowColor=f.hue;ctx.arc(px,py,f.size,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.globalAlpha=.25;ctx.strokeStyle='#d9b9ff';ctx.moveTo(px,py);ctx.lineTo(px+(pointer.x-.5)*18,py-30);ctx.stroke()});ctx.globalAlpha=1;ctx.shadowBlur=0;requestAnimationFrame(draw)}requestAnimationFrame(draw);
+/* ===== 背景飘落花瓣 / 蝴蝶粒子 ===== */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer=document.createElement('div');layer.className='petals-layer';
+  const style=document.createElement('style');
+  style.textContent=`
+    .petals-layer{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+    .petal-p{position:absolute;top:-30px;border:1px solid rgba(201,155,255,.35);background:linear-gradient(135deg,rgba(231,168,216,.5),rgba(185,140,255,.35));border-radius:100% 0 100% 0;opacity:0;animation:petalfall linear infinite}
+    @keyframes petalfall{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.9}90%{opacity:.7}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
+  `;
+  document.head.appendChild(style);document.body.appendChild(layer);
+  const colors=['#c99bff','#e7a8d8','#b98cff'];
+  const N=window.innerWidth<700?10:18;
+  for(let i=0;i<N;i++){
+    const p=document.createElement('span');p.className='petal-p';
+    const s=(8+Math.random()*16);
+    p.style.width=s+'px';p.style.height=(s*1.5)+'px';
+    p.style.left=Math.random()*100+'vw';
+    p.style.animationDuration=(9+Math.random()*14)+'s';
+    p.style.animationDelay=(Math.random()*12)+'s';
+    p.style.background=`linear-gradient(135deg,${colors[i%3]},rgba(185,140,255,.3))`;
+    layer.appendChild(p);
+  }
+})();

@@ -39,7 +39,12 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .paper-noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.10;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
 .progress{position:fixed;z-index:25;top:0;left:0;height:3px;width:0;background:var(--coral);transition:width .1s}
 /* 导航 */
-.nav{height:86px;position:absolute;z-index:5;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 7vw;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(18,8,39,.55),transparent)}
+.nav{height:74px;position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;border-bottom:1px solid rgba(74,47,110,.4);background:rgba(16,9,32,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-link{color:var(--muted);font:10px var(--mono);letter-spacing:.18em;text-decoration:none;position:relative;padding:4px 0;transition:color .3s}
+.nav-link:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--neon);transition:right .4s var(--ease)}
+.nav-link:hover{color:var(--ink)}
+.nav-link:hover:after{right:0}
 .mark{font:500 14px var(--mono);color:var(--wine);text-decoration:none;letter-spacing:.06em}
 .mark span{color:var(--coral)}
 .nav-note{font:10px var(--mono);color:var(--muted);letter-spacing:.1em}
@@ -121,7 +126,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .version-tag{position:fixed;right:20px;bottom:14px;z-index:40;color:var(--muted);font:10px var(--mono);letter-spacing:.14em;opacity:.75;pointer-events:none;transition:opacity .4s}
 .version-tag::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:7px;vertical-align:middle;opacity:.8;box-shadow:0 0 10px rgba(231,168,216,.8)}
 /* 光标 */
-.cursor{position:fixed;z-index:30;width:14px;height:14px;border:1px solid var(--neon);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:.2s;box-shadow:0 0 12px rgba(185,140,255,.5)}
+.cursor{position:fixed;z-index:60;width:26px;height:24px;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;background-color:var(--neon);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 44'%3E%3Cpath d='M24 20 C18 4 4 4 4 14 C4 24 16 28 22 27 L22 34 L26 34 L26 27 C32 28 44 24 44 14 C44 4 30 4 24 20 Z'/%3E%3C/svg%3E") no-repeat center/contain;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 44'%3E%3Cpath d='M24 20 C18 4 4 4 4 14 C4 24 16 28 22 27 L22 34 L26 34 L26 27 C32 28 44 24 44 14 C44 4 30 4 24 20 Z'/%3E%3C/svg%3E") no-repeat center/contain;filter:drop-shadow(0 0 8px rgba(185,140,255,.9));opacity:.9}
 /* 亮/暗主题切换（保留主题切换功能，暗色为深浅紫变体） */
 .dark{--paper:#0a0618;--paper2:#120a24;--ink:#e9ddff;--muted:#a897c7;--wine:#d9a8ff;--coral:#efb2e0;--gold:#cb9cff;--line:#3c2560;--shadow:#05020a66}
 .dark .hero h1{text-shadow:0 0 40px rgba(201,155,255,.3)}
@@ -179,7 +184,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 
 /* ============ 画廊艺术展 ============ */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 32%;filter:saturate(.9) contrast(1.05);transform:scale(1.05);transition:transform 6s ease}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 32%;filter:saturate(.9) contrast(1.05);transform:scale(1.05)}
 .hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,7,28,.82) 0%,rgba(14,7,28,.45) 45%,rgba(14,7,28,.55) 100%),radial-gradient(ellipse at 30% 50%,rgba(185,140,255,.18),transparent 60%)}
 .hero-copy{position:relative;z-index:3;max-width:600px;margin-top:40px}
 .hero-caption{position:absolute;z-index:3;left:13vw;bottom:26px;color:rgba(231,200,255,.55);font:10px var(--mono);letter-spacing:.18em}
@@ -206,5 +211,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 .lightbox-img{max-width:88vw;max-height:80vh;object-fit:contain;border-radius:4px;box-shadow:0 0 80px rgba(185,140,255,.3)}
 .lightbox-cap{margin-top:18px;color:var(--ink);font:14px/1.6 var(--serif);text-align:center;max-width:70vw}
 .lightbox-close{position:absolute;top:24px;right:28px;width:44px;height:44px;border:1px solid var(--line);background:rgba(20,10,40,.5);color:#e8dbff;font:24px/1 var(--serif);cursor:pointer;border-radius:50%;transition:.3s}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border:1px solid var(--line);background:rgba(20,10,40,.55);color:#e8dbff;font:30px/1 var(--serif);cursor:pointer;border-radius:50%;backdrop-filter:blur(6px);transition:.3s;z-index:2}
+.lightbox-nav:hover{background:rgba(107,75,184,.5);color:#fff}
+.lightbox-nav.prev{left:28px}
+.lightbox-nav.next{right:28px}
 .lightbox-close:hover{background:rgba(107,75,184,.4)}
 @media(max-width:800px){.gallery-item{width:92vw;padding:4vh 0}.gallery-item img{max-height:70vh}.gallery-item figcaption b{font-size:24px}.hero-caption{left:8vw;bottom:18px}.hero .hero-bg{background-position:center 30%}}
+/* 展签淡入 */
+.car-caption{transition:opacity .5s ease,transform .5s ease}
+.car-caption.fade-in{animation:capfade .55s var(--ease)}
+@keyframes capfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
