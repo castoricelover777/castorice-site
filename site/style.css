@@ -154,6 +154,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--neon);outline-offse
 .intro-overlay.done{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:700px){.intro-episode{left:8vw;bottom:44px}.intro-enter{right:18px;bottom:26px}.intro-tip{display:none}}
 
+/* ============ 横向电影图集轮播 ============ */
+.gallery{padding-top:120px;padding-bottom:120px}
+.gallery-intro{color:var(--muted);font:16px/1.9 var(--serif);max-width:520px;margin:0 0 40px}
+.carousel{position:relative;max-width:1080px;margin:0 auto}
+.car-stage{position:relative;display:flex;align-items:center;justify-content:center;gap:0}
+.car-main{width:100%;max-width:920px;overflow:hidden;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.55);cursor:pointer}
+.car-main img{display:block;width:100%;aspect-ratio:2.39/1;object-fit:cover;filter:saturate(.95) contrast(1.05);transition:opacity .45s ease,transform .6s ease}
+.car-main img.swap{opacity:0}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:52px;height:52px;border:1px solid var(--line);background:rgba(18,8,40,.55);color:#e8dbff;font:30px/1 var(--serif);cursor:pointer;border-radius:50%;backdrop-filter:blur(6px);transition:.3s}
+.car-btn:hover{background:rgba(107,75,184,.5);color:#fff}
+.car-prev{left:-20px}
+.car-next{right:-20px}
+.car-caption{margin-top:20px;text-align:center;color:#e9dfff}
+.car-caption span{display:block;font:10px var(--mono);letter-spacing:.26em;color:var(--neon);opacity:.9;margin-bottom:8px}
+.car-caption b{font:600 clamp(22px,3vw,32px)/1.2 var(--serif);display:block}
+.car-caption p{margin:8px 0 0;font:15px/1.6 var(--serif);color:rgba(228,214,252,.7)}
+.car-side{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.car-thumb{width:74px;height:44px;padding:0;border:1px solid var(--line);background:none;cursor:pointer;overflow:hidden;border-radius:3px;opacity:.5;transition:.3s}
+.car-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.car-thumb:hover{opacity:.85;border-color:var(--neon)}
+.car-thumb.active{opacity:1;border-color:var(--neon);box-shadow:0 0 0 2px rgba(185,140,255,.4)}
+@media(max-width:800px){.car-btn{width:42px;height:42px}.car-prev{left:6px}.car-next{right:6px}.car-thumb{width:60px;height:38px}}
+
 /* ============ 画廊艺术展 ============ */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 22%;filter:saturate(.9) contrast(1.05);transform:scale(1.05);transition:transform 6s ease}

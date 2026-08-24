@@ -70,20 +70,51 @@ const cursor=$('#cursor');window.addEventListener('pointermove',e=>{cursor.style
 $$('.hand-link,.gallery-item,.theme,.seed').forEach(e=>{e.addEventListener('pointerenter',()=>{cursor.style.width='28px';cursor.style.height='28px'});e.addEventListener('pointerleave',()=>{cursor.style.width='14px';cursor.style.height='14px'})});
 window.addEventListener('scroll',()=>{$('#progress').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'});
 $('#theme').addEventListener('click',()=>{const dark=document.body.classList.toggle('dark');$('#theme').setAttribute('aria-pressed',dark)});
-/* 画廊灯箱：点击展品全屏查看 */
+/* ===== 横向电影图集轮播 ===== */
 (function(){
+  const imgs=[];
+  for(let i=1;i<=12;i++) imgs.push(`assets/gallery/gal_${String(i).padStart(2,'0')}.jpg`);
+  const meta=[
+    {t:'她从哪里来？',c:'雪做的孩子，替终结保管一盏灯。'},
+    {t:'蝴蝶的翅膀',c:'折成花的形状，落在无人记得的夜。'},
+    {t:'月光借给她',c:'今夜，所有的告别都轻一点。'},
+    {t:'记忆花园',c:'点一朵花，它想起一句将要说的告别。'},
+    {t:'四月的新雪',c:'有些花，只在离别之后才开。'},
+    {t:'撑伞的人',c:'她为一场不会停的雨，备了一整夜。'},
+    {t:'花与灰烬',c:'死亡并不带走所有东西，它留下相遇的形状。'},
+    {t:'黄昏的衣摆',c:'她把一整个黄昏，穿成了沉默。'},
+    {t:'静止的时间',c:'花瓣落下时，时间会停在原地。'},
+    {t:'一封没有地址的信',c:'所有未说出口的话，都寄给了昨天。'},
+    {t:'持灯者',c:'她不是终结本身，而是替终结保管一盏灯。'},
+    {t:'蝴蝶与星',c:'她记得的，是来路，不是归途。'}
+  ];
+  const main=$('#carMain'),title=$('#carTitle'),text=$('#carText'),cap=$('#carCaption');
+  const thumbs=[...document.querySelectorAll('.car-thumb')];
+  let idx=0;
+  function show(n){
+    idx=(n+imgs.length)%imgs.length;
+    main.classList.add('swap');
+    setTimeout(()=>{ main.src=imgs[idx]; main.alt='遗蝶大图 '+meta[idx].t; main.classList.remove('swap'); },200);
+    cap.querySelector('span').textContent='CAST · NO.'+String(idx+1).padStart(2,'0');
+    title.textContent=meta[idx].t; text.textContent=meta[idx].c;
+    thumbs.forEach((t,i)=>t.classList.toggle('active',i===idx));
+  }
+  $('#carPrev').addEventListener('click',()=>show(idx-1));
+  $('#carNext').addEventListener('click',()=>show(idx+1));
+  thumbs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.idx)));
+  // 主图点击全屏查看
   const lightbox=document.createElement('div');lightbox.className='lightbox';
   lightbox.innerHTML='<img class="lightbox-img" alt=""><div class="lightbox-cap"></div><button class="lightbox-close" aria-label="关闭">×</button>';
   document.body.appendChild(lightbox);
-  let active=false;
-  function open(src,cap){const img=lightbox.querySelector('.lightbox-img');const c=lightbox.querySelector('.lightbox-cap');img.src=src;c.textContent=cap||'';lightbox.classList.add('show');active=true;document.body.style.overflow='hidden';}
-  function close(){if(!active)return;lightbox.classList.remove('show');active=false;document.body.style.overflow='';}
-  document.querySelectorAll('.gallery-item').forEach(item=>{
-    item.addEventListener('click',()=>{const img=item.querySelector('img');const cap=item.querySelector('figcaption')?item.querySelector('figcaption').innerText:'';open(img.src,cap);});
-  });
-  lightbox.querySelector('.lightbox-close').addEventListener('click',close);
-  lightbox.addEventListener('click',e=>{if(e.target===lightbox) close();});
-  window.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+  function openLB(){const img=lightbox.querySelector('.lightbox-img'),c=lightbox.querySelector('.lightbox-cap');img.src=main.src;c.textContent=title.textContent+' — '+text.textContent;lightbox.classList.add('show');document.body.style.overflow='hidden';}
+  function closeLB(){lightbox.classList.remove('show');document.body.style.overflow='';}
+  main.addEventListener('click',openLB);
+  lightbox.querySelector('.lightbox-close').addEventListener('click',closeLB);
+  lightbox.addEventListener('click',e=>{if(e.target===lightbox) closeLB();});
+  window.addEventListener('keydown',e=>{if(e.key==='Escape') closeLB();});
+  // 键盘左右切换
+  window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(idx-1);if(e.key==='ArrowRight')show(idx+1);});
+  show(0);
 })();
 const canvas=$('#gardenCanvas'),ctx=canvas.getContext('2d'),box=$('#gardenBox'),pop=$('#memoryPop'),seed=$('#seed'),count=$('#flowerCount');let flowers=[],pointer={x:.5,y:.5};
 function resize(){const r=box.getBoundingClientRect(),d=devicePixelRatio;canvas.width=r.width*d;canvas.height=r.height*d;canvas.style.width=r.width+'px';canvas.style.height=r.height+'px';ctx.setTransform(d,0,0,d,0,0)}

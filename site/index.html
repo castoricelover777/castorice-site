@@ -37,23 +37,27 @@
     <section class="gallery section" id="gallery">
       <div class="chapter reveal"><span>I</span><p>展品 / THE GALLERY</p></div>
       <p class="gallery-intro reveal">一组关于 <b>记忆、死亡与新生</b> 的静态切片。<br>每一帧都是一只蝴蝶，停在你愿意停留的地方。</p>
-      <div class="gallery-grid">
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_01.jpg" alt="遗蝶图01" loading="lazy"><figcaption><span>CAST · NO.01</span><b>她从哪里来？</b><p>雪做的孩子，替终结保管一盏灯。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_02.jpg" alt="遗蝶图02" loading="lazy"><figcaption><span>CAST · NO.02</span><b>蝴蝶的翅膀</b><p>折成花的形状，落在无人记得的夜。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_03.jpg" alt="遗蝶图03" loading="lazy"><figcaption><span>CAST · NO.03</span><b>月光借给她</b><p>今夜，所有的告别都轻一点。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_04.jpg" alt="遗蝶图04" loading="lazy"><figcaption><span>CAST · NO.04</span><b>记忆花园</b><p>点一朵花，它想起一句将要说的告别。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_05.jpg" alt="遗蝶图05" loading="lazy"><figcaption><span>CAST · NO.05</span><b>四月的新雪</b><p>有些花，只在离别之后才开。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_06.jpg" alt="遗蝶图06" loading="lazy"><figcaption><span>CAST · NO.06</span><b>撑伞的人</b><p>她为一场不会停的雨，备了一整夜。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_07.jpg" alt="遗蝶图07" loading="lazy"><figcaption><span>CAST · NO.07</span><b>花与灰烬</b><p>死亡并不带走所有东西，它留下相遇的形状。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_08.jpg" alt="遗蝶图08" loading="lazy"><figcaption><span>CAST · NO.08</span><b>黄昏的衣摆</b><p>她把一整个黄昏，穿成了沉默。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_09.jpg" alt="遗蝶图09" loading="lazy"><figcaption><span>CAST · NO.09</span><b>静止的时间</b><p>花瓣落下时，时间会停在原地。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_10.jpg" alt="遗蝶图10" loading="lazy"><figcaption><span>CAST · NO.10</span><b>一封没有地址的信</b><p>所有未说出口的话，都寄给了昨天。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_11.jpg" alt="遗蝶图11" loading="lazy"><figcaption><span>CAST · NO.11</span><b>持灯者</b><p>她不是终结本身，而是替终结保管一盏灯。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_12.jpg" alt="遗蝶图12" loading="lazy"><figcaption><span>CAST · NO.12</span><b>蝴蝶与星</b><p>她记得的，是来路，不是归途。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_13.jpg" alt="遗蝶图13" loading="lazy"><figcaption><span>CAST · NO.13</span><b>虚构的春天</b><p>如果你看见一只紫色蝴蝶，替我问问春天到了没有。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_14.jpg" alt="遗蝶图14" loading="lazy"><figcaption><span>CAST · NO.14</span><b>雪与蝶</b><p>有些人从雪里来，把花留给还在路上的人。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_15.jpg" alt="遗蝶图15" loading="lazy"><figcaption><span>CAST · NO.15</span><b>黎明前</b><p>所有的告别，都会在某个清晨重新开花。</p></figcaption></figure>
-        <figure class="gallery-item reveal"><img src="assets/gallery/gal_16.jpg" alt="遗蝶图16" loading="lazy"><figcaption><span>CAST · NO.16</span><b>Memoria</b><p>她把今天，寄给了明天。</p></figcaption></figure>
+      <div class="carousel" id="carousel">
+        <div class="car-stage">
+          <button class="car-btn car-prev" id="carPrev" aria-label="上一张">‹</button>
+          <div class="car-main"><img id="carMain" src="assets/gallery/gal_01.jpg" alt="遗蝶大图"></div>
+          <button class="car-btn car-next" id="carNext" aria-label="下一张">›</button>
+        </div>
+        <div class="car-caption" id="carCaption"><span>CAST · NO.01</span><b id="carTitle">她从哪里来？</b><p id="carText">雪做的孩子，替终结保管一盏灯。</p></div>
+        <div class="car-side" id="carSide">
+          <button class="car-thumb active" data-idx="0"><img src="assets/gallery/gal_01.jpg" alt="缩略1"></button>
+          <button class="car-thumb" data-idx="1"><img src="assets/gallery/gal_02.jpg" alt="缩略2"></button>
+          <button class="car-thumb" data-idx="2"><img src="assets/gallery/gal_03.jpg" alt="缩略3"></button>
+          <button class="car-thumb" data-idx="3"><img src="assets/gallery/gal_04.jpg" alt="缩略4"></button>
+          <button class="car-thumb" data-idx="4"><img src="assets/gallery/gal_05.jpg" alt="缩略5"></button>
+          <button class="car-thumb" data-idx="5"><img src="assets/gallery/gal_06.jpg" alt="缩略6"></button>
+          <button class="car-thumb" data-idx="6"><img src="assets/gallery/gal_07.jpg" alt="缩略7"></button>
+          <button class="car-thumb" data-idx="7"><img src="assets/gallery/gal_08.jpg" alt="缩略8"></button>
+          <button class="car-thumb" data-idx="8"><img src="assets/gallery/gal_09.jpg" alt="缩略9"></button>
+          <button class="car-thumb" data-idx="9"><img src="assets/gallery/gal_10.jpg" alt="缩略10"></button>
+          <button class="car-thumb" data-idx="10"><img src="assets/gallery/gal_11.jpg" alt="缩略11"></button>
+          <button class="car-thumb" data-idx="11"><img src="assets/gallery/gal_12.jpg" alt="缩略12"></button>
+        </div>
       </div>
     </section>
 
@@ -64,6 +68,6 @@
     </section>
   </main>
   <footer class="footer"><span>CAST·MEMORIA / 遐蝶个人艺术展 · 非官方同人</span><span>made slowly, with a little weather</span><a href="#top">↑</a></footer>
-  <div class="version-tag" id="versionTag">CASTORICE · v0.3.1</div>
+  <div class="version-tag" id="versionTag">CASTORICE · v0.4.0</div>
   <div class="cursor" id="cursor"></div><script src="script.js"></script>
 </body></html>
